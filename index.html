@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>صحبة - تطبيق قراني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0a1a0f;
+            color: #ffffff;
+            direction: rtl;
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: linear-gradient(135deg, #061208, #0d2818);
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 2px solid #c9a84c;
+        }
+
+        .top-bar span {
+            color: #c9a84c;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .top-bar i {
+            margin-left: 8px;
+            color: #c9a84c;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: rgba(10, 26, 15, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .navbar-brand img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #c9a84c;
+        }
+
+        .navbar-brand span {
+            color: #e8d5a3;
+            font-size: 20px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #c9a84c, #f5e6b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e8d5a3;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c9a84c;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #c9a84c;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 60px 20px 50px;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 60%);
+        }
+
+        .hero-logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid #c9a84c;
+            margin-bottom: 25px;
+            box-shadow: 0 0 50px rgba(201, 168, 76, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #c9a84c, #f5e6b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .hero .subtitle {
+            font-size: 20px;
+            color: #e8d5a3;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .hero .desc {
+            font-size: 15px;
+            color: #8faa92;
+            margin-bottom: 30px;
+            line-height: 1.7;
+            padding: 0 10px;
+        }
+
+        /* ===== BUTTONS SIDE BY SIDE ===== */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            color: #fff;
+            padding: 16px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            border: 2px solid #c9a84c;
+            box-shadow: 0 5px 25px rgba(27, 94, 32, 0.4);
+            transition: all 0.3s;
+            min-height: 52px;
+        }
+
+        .btn-download:hover {
+            background: linear-gradient(135deg, #2e7d32, #43a047);
+            transform: translateY(-2px);
+        }
+
+        .btn-support {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #c9a84c, #dbb76a);
+            color: #1a3a2a;
+            padding: 16px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            border: 2px solid #fff;
+            box-shadow: 0 5px 25px rgba(201, 168, 76, 0.35);
+            transition: all 0.3s;
+            min-height: 52px;
+        }
+
+        .btn-support:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 50px 15px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #c9a84c;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: #8faa92;
+            font-size: 16px;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            padding: 0 10px;
+        }
+
+        /* ===== FEATURES GRID ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(26,58,42,0.7), rgba(13,40,24,0.85));
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 16px;
+            padding: 25px 18px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(201, 168, 76, 0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .feature-card .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 16px;
+            color: #f5e6b8;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #8faa92;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* ===== AI HIGHLIGHT ===== */
+        .ai-box {
+            max-width: 800px;
+            margin: 30px auto;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), rgba(26,58,42,0.7));
+            border: 2px solid rgba(201, 168, 76, 0.35);
+            border-radius: 22px;
+            padding: 35px 25px;
+            text-align: center;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #c9a84c, #dbb76a);
+            color: #1a3a2a;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .ai-box h3 {
+            font-size: 28px;
+            color: #c9a84c;
+            margin-bottom: 12px;
+            font-weight: 900;
+        }
+
+        .ai-box p {
+            color: #e8d5a3;
+            font-size: 15px;
+            line-height: 1.9;
+            padding: 0 10px;
+        }
+
+        .ai-box .highlight {
+            color: #f5e6b8;
+            font-weight: 700;
+        }
+
+        .ai-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(27, 94, 32, 0.3);
+            border: 1px solid rgba(67, 160, 71, 0.3);
+            padding: 10px 22px;
+            border-radius: 30px;
+            color: #c8e6c9;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .ai-tag .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #43a047;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* ===== NO ADS ===== */
+        .no-ads {
+            max-width: 800px;
+            margin: 30px auto;
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            border: 2px solid rgba(67, 160, 71, 0.3);
+            border-radius: 18px;
+            padding: 30px 25px;
+            text-align: center;
+        }
+
+        .no-ads h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: 900;
+        }
+
+        .no-ads p {
+            font-size: 15px;
+            color: #c8e6c9;
+            line-height: 1.7;
+        }
+
+        /* ===== DOWNLOAD SECTION ===== */
+        .download-section {
+            padding: 60px 20px;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 60%);
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .download-section h2 {
+            font-size: 36px;
+            color: #c9a84c;
+            margin-bottom: 12px;
+            font-weight: 900;
+        }
+
+        .download-section p {
+            font-size: 17px;
+            color: #8faa92;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #030805;
+            padding: 30px 15px;
+            text-align: center;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .footer p {
+            color: #3d5a42;
+            font-size: 13px;
+        }
+
+        .footer .dev {
+            color: #c9a84c;
+            font-weight: 700;
+            font-size: 15px;
+            margin-top: 5px;
+        }
+
+        /* ===== SUPPORT MODAL ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(3, 8, 5, 0.97);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: linear-gradient(135deg, rgba(26,58,42,0.95), rgba(10,26,15,0.98));
+            border: 2px solid rgba(201, 168, 76, 0.3);
+            border-radius: 22px;
+            padding: 40px 25px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 38px;
+            height: 38px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 2px solid rgba(201, 168, 76, 0.3);
+            border-radius: 50%;
+            color: #c9a84c;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: #c9a84c;
+            color: #1a3a2a;
+        }
+
+        .modal-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .modal-box h2 {
+            font-size: 26px;
+            color: #c9a84c;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .modal-box .modal-text {
+            color: #8faa92;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            padding: 0 5px;
+        }
+
+        .vodafone-box {
+            background: linear-gradient(135deg, rgba(27, 94, 32, 0.4), rgba(27, 94, 32, 0.15));
+            border: 2px solid rgba(67, 160, 71, 0.3);
+            border-radius: 14px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+
+        .vodafone-box .label {
+            font-size: 14px;
+            color: #8faa92;
+            margin-bottom: 8px;
+        }
+
+        .vodafone-box .num {
+            font-size: 30px;
+            font-weight: 900;
+            color: #fff;
+            direction: ltr;
+            letter-spacing: 2px;
+        }
+
+        .vodafone-box .label2 {
+            font-size: 13px;
+            color: #c9a84c;
+            margin-top: 6px;
+        }
+
+        .thanks {
+            font-size: 20px;
+            color: #c9a84c;
+            font-weight: 700;
+            margin: 20px 0 5px;
+        }
+
+        .thanks-sub {
+            font-size: 14px;
+            color: #8faa92;
+        }
+
+        .ps-box {
+            background: rgba(201, 168, 76, 0.06);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .ps-box .ps-icon {
+            font-size: 26px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .ps-box p {
+            color: #e8d5a3;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(3, 8, 5, 0.98);
+            z-index: 1500;
+            padding: 60px 30px 30px;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: #e8d5a3;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 700;
+            padding: 12px 30px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(201, 168, 76, 0.1);
+            color: #c9a84c;
+        }
+
+        .mobile-menu .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #c9a84c;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ===== SCROLL TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #c9a84c, #dbb76a);
+            border: none;
+            border-radius: 50%;
+            color: #1a3a2a;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+        }
+
+        .scroll-top.visible {
+            display: flex;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 40px 15px 35px;
+            }
+
+            .hero-logo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .hero .desc {
+                font-size: 14px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .btn-download, .btn-support {
+                width: 100%;
+                max-width: 320px;
+                padding: 15px 25px;
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 40px 12px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .section-desc {
+                font-size: 14px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .feature-card {
+                padding: 20px 15px;
+            }
+
+            .ai-box {
+                padding: 25px 18px;
+            }
+
+            .ai-box h3 {
+                font-size: 24px;
+            }
+
+            .ai-box p {
+                font-size: 14px;
+            }
+
+            .download-section h2 {
+                font-size: 28px;
+            }
+
+            .modal-box {
+                padding: 35px 20px;
+            }
+
+            .vodafone-box .num {
+                font-size: 26px;
+            }
+
+            .no-ads {
+                padding: 25px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .hero .subtitle {
+                font-size: 16px;
+            }
+
+            .hero-logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .btn-download, .btn-support {
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+
+            .feature-card .icon {
+                font-size: 28px;
+            }
+
+            .feature-card h3 {
+                font-size: 15px;
+            }
+        }
+
+        /* Prevent text selection on mobile */
+        @media (max-width: 768px) {
+            body {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            a, button {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <span><i class="fas fa-user-shield"></i> المطور: عمر ابراهيم</span>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            <img src="https://cdn.phototourl.com/free/2026-09-13-a5e8961d-6ab3-4575-8995-f0606ec48ffc.jpg" alt="صحبة">
+            <span>صحبة</span>
+        </a>
+        <button class="mobile-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#features">المميزات</a></li>
+            <li><a href="#ai">صحبة AI</a></li>
+            <li><a href="#download">تحميل</a></li>
+            <li><a href="#support" onclick="openSupport(event)">الدعم</a></li>
+        </ul>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+        <a href="#features" onclick="toggleMenu()">المميزات</a>
+        <a href="#ai" onclick="toggleMenu()">صحبة AI</a>
+        <a href="#download" onclick="toggleMenu()">تحميل</a>
+        <a href="#support" onclick="openSupport(event); toggleMenu();">الدعم</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <img src="https://cdn.phototourl.com/free/2026-09-13-a5e8961d-6ab3-4575-8995-f0606ec48ffc.jpg" alt="لوجو صحبة" class="hero-logo">
+        <h1>صحبة</h1>
+        <p class="subtitle">تطبيق قراني شامل</p>
+        <p class="desc">صاحبك في القرآن الكريم — كل ما تحتاجه في تطبيق واحد نقي بدون أي إعلانات</p>
+        <div class="btn-group">
+            <a href="https://www.mediafire.com/file/edttcro9qd9nk2e/sohba.quran-1.apk/file" target="_blank" rel="noopener noreferrer" class="btn-download">
+                <i class="fas fa-download"></i> تحميل للأندرويد
+            </a>
+            <a href="#support" onclick="openSupport(event)" class="btn-support">
+                <i class="fas fa-hands-helping"></i> ادعمنا
+            </a>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+        <h2 class="section-title">المميزات</h2>
+        <p class="section-desc">تطبيق قراني متكامل يجمع لك أدوات العبادة والاستذكار في مكان واحد</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="icon">🕐</span>
+                <h3>مواقيت الصلاة</h3>
+                <p>مواقيت صلاة دقيقة حسب موقعك مع التنبيهات</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">📖</span>
+                <h3>القرآن الكريم</h3>
+                <p>جميع السور مع تفسير كل آية بوضوح</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🤲</span>
+                <h3>السبحة</h3>
+                <p>سبحة رقمية مع عداد وحساب الحمد</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🧭</span>
+                <h3>القبلة</h3>
+                <p>معرفة اتجاه القبلة من موقعك في أي مكان</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">📿</span>
+                <h3>الأذكار والأدعية</h3>
+                <p>أذكار وأدعية نبوية يومية شاملة</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🌙</span>
+                <h3>السنة النبوية</h3>
+                <p>أحاديث وأثار من السنة مع شرحها</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🔊</span>
+                <h3>ميزة الأذان</h3>
+                <p>الأذان بأصوات قرّاء مشاهير مع التنبيهات</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">✨</span>
+                <h3>بدون إعلانات</h3>
+                <p>تطبيق نقي خالي تماماً من أي إعلانات</p>
+            </div>
+        </div>
+
+        <!-- NO ADS BANNER -->
+        <div class="no-ads">
+            <h3>🚫 بدون أي إعلانات</h3>
+            <p>تطبيقنا نقي تماماً لكي تستمتع بتجربة قرائية هادئة ومريحة</p>
+        </div>
+    </section>
+
+    <!-- AI -->
+    <section class="section" id="ai">
+        <h2 class="section-title">صحبة AI</h2>
+        <p class="section-desc">أهم ميزة في التطبيق — مساعدك الذكي في الدين</p>
+        <div class="ai-box">
+            <span class="ai-badge"><i class="fas fa-star"></i> الميزة الأهم</span>
+            <h3>💬 صحبة AI</h3>
+            <p>
+                يمكنك السؤال عن <span class="highlight">أي شيء في الدين</span> وسوف يجيبك صحبة AI بإجابات دقيقة ومبنية على مصادر شرعية موثوقة.
+                سواء سألت عن أحكام، أو أحاديث، أو تفسير، أو أي شيء آخر — <strong>هو شريكك الدائم في دينك</strong>.
+            </p>
+            <div class="ai-tag">
+                <span class="live-dot"></span>
+                <span>🤖 ذكاء اصطناعي ديني</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOWNLOAD -->
+    <section class="download-section" id="download">
+        <h2>📲 حمّل التطبيق الآن</h2>
+        <p>صحبة — صاحبك في القرآن الكريم 💚</p>
+        <div class="btn-group">
+            <a href="https://www.mediafire.com/file/edttcro9qd9nk2e/sohba.quran-1.apk/file" target="_blank" rel="noopener noreferrer" class="btn-download">
+                <i class="fas fa-download"></i> تحميل للأندرويد
+            </a>
+            <a href="#support" onclick="openSupport(event)" class="btn-support">
+                <i class="fas fa-hands-helping"></i> ادعمنا
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2026 — تطبيق صحبة — جميع الحقوق محفوظة</p>
+        <p class="dev">المطور: عمر ابراهيم</p>
+    </footer>
+
+    <!-- SUPPORT MODAL -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeSupport()">✕</button>
+            <div class="modal-icon">🤝</div>
+            <h2>ادعمنا</h2>
+            <p class="modal-text">
+                إذا أعجبك التطبيق ووجدت فيه فائدة، ساعدنا في نشره حتى يصل إلى المزيد من المسلمين
+            </p>
+
+            <div class="vodafone-box">
+                <p class="label">📱 فودافون كاش</p>
+                <div class="num">01010662715</div>
+                <p class="label2">رقم الدعم</p>
+            </div>
+
+            <p class="thanks">جزاك الله خيراً 🤲</p>
+            <p class="thanks-sub">شكراً لاستجابتك</p>
+
+            <div class="ps-box">
+                <span class="ps-icon">🎮</span>
+                <p>
+                    إذا أمكن، ساعدنا في نشر التطبيق على متجر Google Play حتى يصل لعدد أكبر من المستخدمين.
+                    أي دعم مادي أو معنوي يُسعدنا ويُزدهر العمل على إنشاء تطبيقات إسلامية مفيدة.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCROLL TOP -->
+    <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Support modal
+        function openSupport(e) {
+            e.preventDefault();
+            document.getElementById('supportModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSupport() {
+            document.getElementById('supportModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('supportModal').addEventListener('click', function(e) {
+            if (e.target === this) closeSupport();
+        });
+
+        // Scroll to top button
+        const scrollBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+
+        // Close modal on Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeSupport();
+        });
+
+        // Prevent zoom on double tap (mobile)
+        document.addEventListener('touchend', function(e) {
+            if (e.touches.length > 1) e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>
