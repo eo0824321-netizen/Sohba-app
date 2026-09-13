@@ -14,9 +14,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Cairo', sans-serif;
@@ -100,9 +98,7 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #c9a84c;
-        }
+        .nav-links a:hover { color: #c9a84c; }
 
         .mobile-toggle {
             display: none;
@@ -155,7 +151,7 @@
             padding: 0 10px;
         }
 
-        /* ===== BUTTONS SIDE BY SIDE ===== */
+        /* ===== BUTTONS ===== */
         .btn-group {
             display: flex;
             justify-content: center;
@@ -207,7 +203,30 @@
             min-height: 52px;
         }
 
-        .btn-support:hover {
+        .btn-support:hover { transform: translateY(-2px); }
+
+        .btn-windows {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #fff;
+            padding: 16px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            border: 2px solid #42a5f5;
+            box-shadow: 0 5px 25px rgba(13, 71, 161, 0.4);
+            transition: all 0.3s;
+            min-height: 52px;
+            cursor: pointer;
+        }
+
+        .btn-windows:hover {
+            background: linear-gradient(135deg, #1565c0, #1e88e5);
             transform: translateY(-2px);
         }
 
@@ -245,7 +264,7 @@
             padding: 0 10px;
         }
 
-        /* ===== FEATURES GRID ===== */
+        /* ===== FEATURES ===== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -286,7 +305,7 @@
             line-height: 1.7;
         }
 
-        /* ===== AI HIGHLIGHT ===== */
+        /* ===== AI ===== */
         .ai-box {
             max-width: 800px;
             margin: 30px auto;
@@ -378,7 +397,7 @@
             line-height: 1.7;
         }
 
-        /* ===== DOWNLOAD SECTION ===== */
+        /* ===== DOWNLOAD ===== */
         .download-section {
             padding: 60px 20px;
             text-align: center;
@@ -393,11 +412,15 @@
             font-weight: 900;
         }
 
-        .download-section p {
+        .download-section > p {
             font-size: 17px;
             color: #8faa92;
             margin-bottom: 30px;
             padding: 0 10px;
+        }
+
+        .download-section .btn-group {
+            margin-bottom: 15px;
         }
 
         /* ===== FOOTER ===== */
@@ -408,17 +431,8 @@
             border-top: 1px solid rgba(201, 168, 76, 0.1);
         }
 
-        .footer p {
-            color: #3d5a42;
-            font-size: 13px;
-        }
-
-        .footer .dev {
-            color: #c9a84c;
-            font-weight: 700;
-            font-size: 15px;
-            margin-top: 5px;
-        }
+        .footer p { color: #3d5a42; font-size: 13px; }
+        .footer .dev { color: #c9a84c; font-weight: 700; font-size: 15px; margin-top: 5px; }
 
         /* ===== SUPPORT MODAL ===== */
         .modal-overlay {
@@ -432,9 +446,7 @@
             padding: 20px;
         }
 
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal-box {
             background: linear-gradient(135deg, rgba(26,58,42,0.95), rgba(10,26,15,0.98));
@@ -473,10 +485,7 @@
             color: #1a3a2a;
         }
 
-        .modal-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
+        .modal-icon { font-size: 40px; margin-bottom: 10px; }
 
         .modal-box h2 {
             font-size: 26px;
@@ -501,11 +510,7 @@
             margin: 20px 0;
         }
 
-        .vodafone-box .label {
-            font-size: 14px;
-            color: #8faa92;
-            margin-bottom: 8px;
-        }
+        .vodafone-box .label { font-size: 14px; color: #8faa92; margin-bottom: 8px; }
 
         .vodafone-box .num {
             font-size: 30px;
@@ -515,23 +520,10 @@
             letter-spacing: 2px;
         }
 
-        .vodafone-box .label2 {
-            font-size: 13px;
-            color: #c9a84c;
-            margin-top: 6px;
-        }
+        .vodafone-box .label2 { font-size: 13px; color: #c9a84c; margin-top: 6px; }
 
-        .thanks {
-            font-size: 20px;
-            color: #c9a84c;
-            font-weight: 700;
-            margin: 20px 0 5px;
-        }
-
-        .thanks-sub {
-            font-size: 14px;
-            color: #8faa92;
-        }
+        .thanks { font-size: 20px; color: #c9a84c; font-weight: 700; margin: 20px 0 5px; }
+        .thanks-sub { font-size: 14px; color: #8faa92; }
 
         .ps-box {
             background: rgba(201, 168, 76, 0.06);
@@ -541,16 +533,39 @@
             margin-top: 20px;
         }
 
-        .ps-box .ps-icon {
-            font-size: 26px;
-            margin-bottom: 8px;
-            display: block;
+        .ps-box .ps-icon { font-size: 26px; margin-bottom: 8px; display: block; }
+        .ps-box p { color: #e8d5a3; font-size: 14px; line-height: 1.9; }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: #fff;
+            padding: 16px 30px;
+            border-radius: 14px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            z-index: 3000;
+            box-shadow: 0 8px 30px rgba(13, 71, 161, 0.5);
+            border: 1px solid rgba(66, 165, 245, 0.4);
+            opacity: 0;
+            transition: all 0.4s ease;
+            text-align: center;
+            max-width: 90%;
         }
 
-        .ps-box p {
-            color: #e8d5a3;
-            font-size: 14px;
-            line-height: 1.9;
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            margin-left: 8px;
+            color: #90caf9;
         }
 
         /* ===== MOBILE MENU ===== */
@@ -566,9 +581,7 @@
             align-items: center;
         }
 
-        .mobile-menu.active {
-            display: flex;
-        }
+        .mobile-menu.active { display: flex; }
 
         .mobile-menu a {
             color: #e8d5a3;
@@ -616,40 +629,18 @@
             box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
         }
 
-        .scroll-top.visible {
-            display: flex;
-        }
+        .scroll-top.visible { display: flex; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+            .nav-links { display: none; }
+            .mobile-toggle { display: block; }
 
-            .mobile-toggle {
-                display: block;
-            }
-
-            .hero {
-                padding: 40px 15px 35px;
-            }
-
-            .hero-logo {
-                width: 120px;
-                height: 120px;
-            }
-
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .hero .subtitle {
-                font-size: 18px;
-            }
-
-            .hero .desc {
-                font-size: 14px;
-            }
+            .hero { padding: 40px 15px 35px; }
+            .hero-logo { width: 120px; height: 120px; }
+            .hero h1 { font-size: 40px; }
+            .hero .subtitle { font-size: 18px; }
+            .hero .desc { font-size: 14px; }
 
             .btn-group {
                 flex-direction: column;
@@ -657,101 +648,44 @@
                 gap: 12px;
             }
 
-            .btn-download, .btn-support {
+            .btn-download, .btn-support, .btn-windows {
                 width: 100%;
                 max-width: 320px;
                 padding: 15px 25px;
                 font-size: 16px;
             }
 
-            .section {
-                padding: 40px 12px;
-            }
+            .section { padding: 40px 12px; }
+            .section-title { font-size: 26px; }
+            .section-desc { font-size: 14px; }
 
-            .section-title {
-                font-size: 26px;
-            }
+            .features-grid { grid-template-columns: 1fr; gap: 12px; }
+            .feature-card { padding: 20px 15px; }
 
-            .section-desc {
-                font-size: 14px;
-            }
+            .ai-box { padding: 25px 18px; }
+            .ai-box h3 { font-size: 24px; }
+            .ai-box p { font-size: 14px; }
 
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .feature-card {
-                padding: 20px 15px;
-            }
-
-            .ai-box {
-                padding: 25px 18px;
-            }
-
-            .ai-box h3 {
-                font-size: 24px;
-            }
-
-            .ai-box p {
-                font-size: 14px;
-            }
-
-            .download-section h2 {
-                font-size: 28px;
-            }
-
-            .modal-box {
-                padding: 35px 20px;
-            }
-
-            .vodafone-box .num {
-                font-size: 26px;
-            }
-
-            .no-ads {
-                padding: 25px 18px;
-            }
+            .download-section h2 { font-size: 28px; }
+            .modal-box { padding: 35px 20px; }
+            .vodafone-box .num { font-size: 26px; }
+            .no-ads { padding: 25px 18px; }
         }
 
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 34px;
-            }
-
-            .hero .subtitle {
-                font-size: 16px;
-            }
-
-            .hero-logo {
-                width: 100px;
-                height: 100px;
-            }
-
-            .btn-download, .btn-support {
+            .hero h1 { font-size: 34px; }
+            .hero .subtitle { font-size: 16px; }
+            .hero-logo { width: 100px; height: 100px; }
+            .btn-download, .btn-support, .btn-windows {
                 padding: 14px 20px;
                 font-size: 15px;
             }
-
-            .feature-card .icon {
-                font-size: 28px;
-            }
-
-            .feature-card h3 {
-                font-size: 15px;
-            }
+            .feature-card .icon { font-size: 28px; }
+            .feature-card h3 { font-size: 15px; }
         }
 
-        /* Prevent text selection on mobile */
         @media (max-width: 768px) {
-            body {
-                -webkit-user-select: none;
-                user-select: none;
-            }
-            a, button {
-                -webkit-user-select: none;
-                user-select: none;
-            }
+            body, a, button { -webkit-user-select: none; user-select: none; }
         }
     </style>
 </head>
@@ -795,7 +729,7 @@
         <p class="subtitle">تطبيق قراني شامل</p>
         <p class="desc">صاحبك في القرآن الكريم — كل ما تحتاجه في تطبيق واحد نقي بدون أي إعلانات</p>
         <div class="btn-group">
-            <a href="https://www.mediafire.com/file/edttcro9qd9nk2e/sohba.quran-1.apk/file" target="_blank" rel="noopener noreferrer" class="btn-download">
+            <a href="https://www.mediafire.com/file/ftnurhaat5yu5ez/sohba.quran-v1.1.apk/file" target="_blank" rel="noopener noreferrer" class="btn-download">
                 <i class="fas fa-download"></i> تحميل للأندرويد
             </a>
             <a href="#support" onclick="openSupport(event)" class="btn-support">
@@ -851,10 +785,9 @@
             </div>
         </div>
 
-        <!-- NO ADS BANNER -->
         <div class="no-ads">
             <h3>🚫 بدون أي إعلانات</h3>
-            <p>تطبيقنا نقي تماماً لكي تستمتع بتجربة قرائية هادئة ومريحة</p>
+            <p>تطبيقنا نقي تماماً لكي تستمتع بتجربة قرانية هادئة ومريحة</p>
         </div>
     </section>
 
@@ -881,9 +814,12 @@
         <h2>📲 حمّل التطبيق الآن</h2>
         <p>صحبة — صاحبك في القرآن الكريم 💚</p>
         <div class="btn-group">
-            <a href="https://www.mediafire.com/file/edttcro9qd9nk2e/sohba.quran-1.apk/file" target="_blank" rel="noopener noreferrer" class="btn-download">
+            <a href="https://www.mediafire.com/file/ftnurhaat5yu5ez/sohba.quran-v1.1.apk/file" target="_blank" rel="noopener noreferrer" class="btn-download">
                 <i class="fas fa-download"></i> تحميل للأندرويد
             </a>
+            <button class="btn-windows" onclick="showToast()">
+                <i class="fab fa-windows"></i> تحميل للويندوز
+            </button>
             <a href="#support" onclick="openSupport(event)" class="btn-support">
                 <i class="fas fa-hands-helping"></i> ادعمنا
             </a>
@@ -925,16 +861,21 @@
         </div>
     </div>
 
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <i class="fas fa-clock"></i>
+        سيتوفر قريباً إن شاء الله 🤲
+    </div>
+
     <!-- SCROLL TOP -->
     <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
-        // Mobile menu toggle
+        // Mobile menu
         function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('active');
+            document.getElementById('mobileMenu').classList.toggle('active');
         }
 
         // Support modal
@@ -953,7 +894,16 @@
             if (e.target === this) closeSupport();
         });
 
-        // Scroll to top button
+        // Toast notification
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Scroll to top
         const scrollBtn = document.getElementById('scrollTopBtn');
         window.addEventListener('scroll', function() {
             if (window.scrollY > 300) {
@@ -968,7 +918,7 @@
             if (e.key === 'Escape') closeSupport();
         });
 
-        // Prevent zoom on double tap (mobile)
+        // Prevent zoom on double tap
         document.addEventListener('touchend', function(e) {
             if (e.touches.length > 1) e.preventDefault();
         }, { passive: false });
