@@ -2,905 +2,3005 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>صحبة - تطبيق قراني</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="description"
+        content="صحبة — تطبيق قراني متكامل بمواقيت الصلاة، القرآن الكريم، تفسير الآيات، الأذكار، الأدعية، السيرة النبوية، القبلة، الأذان، والسبحة، مع ميزة صحبة AI."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b3d35"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="format-detection"
+        content="telephone=no"
+    >
+
+    <meta
+        name="application-name"
+        content="صحبة"
+    >
+
+    <title>
+        صحبة — تطبيق قراني
+    </title>
+
+    <link
+        rel="icon"
+        href="https://cdn.phototourl.com/free/2026-09-13-a5e8961d-6ab3-4575-8995-f0606ec48ffc.jpg"
+        type="image/jpeg"
+    >
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+        :root {
+            --emerald-950: #061d19;
+            --emerald-900: #0b3d35;
+            --emerald-800: #115347;
+            --emerald-700: #17695a;
+            --emerald-600: #239074;
+            --emerald-500: #36aa8a;
+            --emerald-200: #b8e1d3;
+            --mint: #effaf6;
+            --gold: #d1ad62;
+            --gold-light: #f5e3b5;
+            --cream: #fbfcf9;
+            --white: #ffffff;
+            --text: #10231f;
+            --muted: #61746e;
+            --line: #dce8e3;
+            --blue: #2563eb;
+            --blue-dark: #1d4ed8;
+            --violet: #7c3aed;
+            --danger: #b84e43;
+            --shadow-sm: 0 8px 24px rgba(6, 29, 25, 0.08);
+            --shadow-md: 0 18px 50px rgba(6, 29, 25, 0.13);
+            --shadow-lg: 0 30px 80px rgba(6, 29, 25, 0.18);
+            --radius-sm: 14px;
+            --radius-md: 22px;
+            --radius-lg: 34px;
+            --container: 1180px;
         }
 
-        html { scroll-behavior: smooth; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 110px;
+        }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #0a1a0f;
-            color: #ffffff;
-            direction: rtl;
+            min-width: 320px;
             overflow-x: hidden;
-            min-height: 100vh;
+            color: var(--text);
+            background:
+                radial-gradient(
+                    circle at 8% 12%,
+                    rgba(41, 162, 130, 0.12),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 92% 88%,
+                    rgba(209, 173, 98, 0.12),
+                    transparent 25%
+                ),
+                var(--cream);
+            font-family: "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
         }
 
-        .top-bar {
-            background: linear-gradient(135deg, #061208, #0d2818);
-            padding: 10px 15px;
-            text-align: center;
-            border-bottom: 2px solid #c9a84c;
+        body.modal-open {
+            overflow: hidden;
         }
 
-        .top-bar span {
-            color: #c9a84c;
-            font-size: 15px;
-            font-weight: 700;
+        ::selection {
+            color: var(--white);
+            background: var(--emerald-700);
         }
 
-        .top-bar i {
-            margin-left: 8px;
-            color: #c9a84c;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        .navbar {
-            background: rgba(10, 26, 15, 0.95);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 10px 15px;
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(calc(100% - 36px), var(--container));
+            margin-inline: auto;
+        }
+
+        .skip-link {
+            position: fixed;
+            top: -80px;
+            right: 20px;
+            z-index: 2000;
+            padding: 10px 16px;
+            color: var(--white);
+            background: var(--emerald-800);
+            border-radius: 10px;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+        }
+
+        .developer-bar {
+            position: relative;
+            z-index: 101;
+            color: #fff9e9;
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--emerald-900),
+                    #72592a,
+                    var(--emerald-900)
+                );
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            font-size: 0.82rem;
+            letter-spacing: 0.02em;
+        }
+
+        .developer-bar .container {
+            min-height: 36px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+        }
+
+        .developer-bar strong {
+            color: var(--gold-light);
+            font-weight: 800;
+        }
+
+        .site-header {
             position: sticky;
             top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            z-index: 100;
+            background: rgba(251, 252, 249, 0.9);
+            border-bottom: 1px solid rgba(18, 75, 63, 0.09);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
-        .navbar-brand {
+        .header-inner {
+            min-height: 76px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-decoration: none;
+            justify-content: space-between;
+            gap: 24px;
         }
 
-        .navbar-brand img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #c9a84c;
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
         }
 
-        .navbar-brand span {
-            color: #e8d5a3;
-            font-size: 20px;
+        .brand-logo {
+            width: 54px;
+            height: 54px;
+            flex: 0 0 auto;
+            object-fit: contain;
+            border-radius: 17px;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .brand-copy {
+            min-width: 0;
+        }
+
+        .brand-name {
+            color: var(--emerald-900);
+            font-size: 1.25rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #c9a84c, #f5e6b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
         }
 
-        .nav-links {
+        .brand-subtitle {
+            color: var(--muted);
+            font-size: 0.76rem;
+            line-height: 1.35;
+        }
+
+        .site-nav {
             display: flex;
-            gap: 18px;
             align-items: center;
-            list-style: none;
+            gap: 26px;
         }
 
-        .nav-links a {
-            color: #e8d5a3;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: color 0.3s;
+        .site-nav a,
+        .nav-support {
+            color: var(--emerald-800);
+            font-size: 0.91rem;
+            font-weight: 800;
+            border: 0;
+            background: transparent;
+            transition: color 0.2s ease, transform 0.2s ease;
         }
 
-        .nav-links a:hover { color: #c9a84c; }
-
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: #c9a84c;
-            font-size: 22px;
-            cursor: pointer;
-            padding: 5px;
+        .site-nav a:hover,
+        .nav-support:hover {
+            color: var(--gold);
+            transform: translateY(-1px);
         }
 
         .hero {
-            padding: 60px 20px 50px;
-            text-align: center;
             position: relative;
-            background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 60%);
+            overflow: hidden;
+            padding: 78px 0 88px;
         }
 
-        .hero-logo {
-            width: 140px;
-            height: 140px;
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -170px;
+            left: -130px;
+            width: 440px;
+            height: 440px;
             border-radius: 50%;
-            border: 3px solid #c9a84c;
-            margin-bottom: 25px;
-            box-shadow: 0 0 50px rgba(201, 168, 76, 0.3);
+            background: rgba(41, 162, 130, 0.09);
+            pointer-events: none;
         }
 
-        .hero h1 {
-            font-size: 52px;
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -220px;
+            right: -160px;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            background: rgba(209, 173, 98, 0.1);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+            align-items: center;
+            gap: 62px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 18px;
+            padding: 8px 14px;
+            color: var(--emerald-800);
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(23, 105, 90, 0.16);
+            border-radius: 999px;
+            box-shadow: var(--shadow-sm);
+            font-size: 0.82rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #c9a84c, #f5e6b8);
+        }
+
+        .eyebrow-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald-500);
+            border-radius: 50%;
+            box-shadow: 0 0 0 5px rgba(54, 170, 138, 0.12);
+        }
+
+        .app-title {
+            max-width: 650px;
+            color: var(--emerald-950);
+            font-size: clamp(4rem, 10vw, 7rem);
+            font-weight: 950;
+            line-height: 0.92;
+            letter-spacing: -0.06em;
+        }
+
+        .app-title span {
+            display: block;
+            background: linear-gradient(
+                135deg,
+                var(--emerald-500),
+                var(--gold)
+            );
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            background-clip: text;
+            color: transparent;
         }
 
-        .hero .subtitle {
-            font-size: 20px;
-            color: #e8d5a3;
-            margin-bottom: 8px;
-            font-weight: 600;
+        .hero-description {
+            max-width: 650px;
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: 1.08rem;
+            line-height: 1.9;
         }
 
-        .hero .desc {
-            font-size: 15px;
-            color: #8faa92;
-            margin-bottom: 30px;
-            line-height: 1.7;
-            padding: 0 10px;
+        .hero-description strong {
+            color: var(--emerald-800);
         }
 
-        .btn-group {
+        .hero-points {
             display: flex;
-            justify-content: center;
-            gap: 15px;
             flex-wrap: wrap;
-            margin-bottom: 10px;
+            gap: 10px;
+            margin-top: 24px;
         }
 
-        .btn-download {
+        .hero-point {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 12px;
+            color: var(--emerald-800);
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .hero-point span {
+            color: var(--gold);
+            font-weight: 950;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            min-height: 56px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #1b5e20, #2e7d32);
-            color: #fff;
-            padding: 16px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 17px;
-            font-weight: 700;
-            font-family: 'Cairo', sans-serif;
-            border: 2px solid #c9a84c;
-            box-shadow: 0 5px 25px rgba(27, 94, 32, 0.4);
-            transition: all 0.3s;
-            min-height: 52px;
+            gap: 10px;
+            padding: 14px 20px;
+            border: 1px solid transparent;
+            border-radius: 16px;
+            font-weight: 900;
+            line-height: 1.35;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
         }
 
-        .btn-download:hover {
-            background: linear-gradient(135deg, #2e7d32, #43a047);
+        .btn:hover {
             transform: translateY(-2px);
         }
 
-        .btn-support {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #c9a84c, #dbb76a);
-            color: #1a3a2a;
-            padding: 16px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 17px;
-            font-weight: 700;
-            font-family: 'Cairo', sans-serif;
-            border: 2px solid #fff;
-            box-shadow: 0 5px 25px rgba(201, 168, 76, 0.35);
-            transition: all 0.3s;
-            min-height: 52px;
+        .btn-primary {
+            color: var(--white);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--emerald-800),
+                    var(--emerald-600)
+                );
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 14px 30px rgba(17, 83, 71, 0.24);
         }
 
-        .btn-support:hover { transform: translateY(-2px); }
-
-        .btn-windows {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #0d47a1, #1565c0);
-            color: #fff;
-            padding: 16px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 17px;
-            font-weight: 700;
-            font-family: 'Cairo', sans-serif;
-            border: 2px solid #42a5f5;
-            box-shadow: 0 5px 25px rgba(13, 71, 161, 0.4);
-            transition: all 0.3s;
-            min-height: 52px;
-            cursor: pointer;
+        .btn-primary:hover {
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--emerald-700),
+                    var(--emerald-500)
+                );
+            box-shadow: 0 18px 36px rgba(17, 83, 71, 0.3);
         }
 
-        .btn-windows:hover {
-            background: linear-gradient(135deg, #1565c0, #1e88e5);
+        .btn-secondary {
+            color: var(--emerald-800);
+            background: var(--white);
+            border-color: var(--line);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--emerald-500);
+            box-shadow: 0 14px 30px rgba(17, 83, 71, 0.14);
+        }
+
+        .button-main,
+        .button-subtitle {
+            display: block;
+        }
+
+        .button-subtitle {
+            margin-top: 2px;
+            opacity: 0.78;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .direct-note {
+            margin-top: 15px;
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .direct-note strong {
+            color: var(--emerald-800);
+        }
+
+        .windows-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 17px;
+        }
+
+        .windows-button {
+            min-height: 48px;
+            padding: 12px 18px;
+            color: var(--white);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--violet)
+                );
+            border: 0;
+            border-radius: 14px;
+            font-size: 0.88rem;
+            font-weight: 900;
+            box-shadow: 0 12px 26px rgba(37, 99, 235, 0.2);
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .windows-button:hover {
             transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(37, 99, 235, 0.28);
+        }
+
+        .windows-note {
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual::before {
+            content: "";
+            position: absolute;
+            width: 430px;
+            height: 430px;
+            border-radius: 50%;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255, 255, 255, 0.95),
+                    rgba(239, 250, 246, 0.45) 62%,
+                    transparent 63%
+                );
+            box-shadow:
+                inset 0 0 0 1px rgba(23, 105, 90, 0.08),
+                0 28px 70px rgba(6, 29, 25, 0.1);
+        }
+
+        .visual-orbit {
+            position: absolute;
+            border: 1px solid rgba(23, 105, 90, 0.14);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .orbit-one {
+            width: 460px;
+            height: 460px;
+            animation: slow-spin 22s linear infinite;
+        }
+
+        .orbit-two {
+            width: 380px;
+            height: 380px;
+            border-style: dashed;
+            animation: slow-spin-reverse 18s linear infinite;
+        }
+
+        .phone-mockup {
+            position: relative;
+            z-index: 2;
+            width: min(340px, 88%);
+            padding: 12px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #173f36,
+                    #071d19
+                );
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 38px;
+            box-shadow: var(--shadow-lg);
+            transform: rotate(-2deg);
+        }
+
+        .phone-mockup::before {
+            content: "";
+            position: absolute;
+            inset: 7px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 33px;
+            pointer-events: none;
+        }
+
+        .phone-notch {
+            width: 100px;
+            height: 20px;
+            margin: 0 auto 10px;
+            background: #071d19;
+            border-radius: 0 0 14px 14px;
+        }
+
+        .phone-screen {
+            position: relative;
+            min-height: 520px;
+            overflow: hidden;
+            padding: 22px 18px 18px;
+            background:
+                radial-gradient(
+                    circle at 80% 5%,
+                    rgba(209, 173, 98, 0.22),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    180deg,
+                    #f7fffb,
+                    #eaf7f1
+                );
+            border-radius: 28px;
+        }
+
+        .phone-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .phone-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--emerald-900);
+            font-size: 0.9rem;
+            font-weight: 950;
+        }
+
+        .phone-brand img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .phone-status {
+            color: var(--emerald-800);
+            font-size: 0.68rem;
+            font-weight: 800;
+        }
+
+        .phone-greeting {
+            margin-top: 28px;
+            color: var(--emerald-950);
+            font-size: 1.35rem;
+            font-weight: 950;
+            line-height: 1.35;
+        }
+
+        .phone-subtitle {
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+
+        .mock-card {
+            margin-top: 22px;
+            padding: 18px;
+            background: var(--white);
+            border: 1px solid rgba(23, 105, 90, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 12px 28px rgba(6, 29, 25, 0.08);
+        }
+
+        .mock-card-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            color: var(--emerald-700);
+            font-size: 0.76rem;
+            font-weight: 900;
+        }
+
+        .mock-card-label span:last-child {
+            color: var(--gold);
+        }
+
+        .mock-verse {
+            margin-top: 14px;
+            color: var(--emerald-900);
+            font-family: "Amiri", Tahoma, serif;
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+
+        .mock-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 16px;
+            padding-top: 12px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            font-size: 0.68rem;
+        }
+
+        .mock-footer-button {
+            padding: 6px 9px;
+            color: var(--white);
+            background: var(--emerald-700);
+            border-radius: 8px;
+            font-weight: 900;
+        }
+
+        .mock-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .mock-tile {
+            min-height: 78px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: var(--emerald-800);
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(23, 105, 90, 0.1);
+            border-radius: 16px;
+            font-size: 0.74rem;
+            font-weight: 900;
+            text-align: center;
+        }
+
+        .mock-tile small {
+            color: var(--muted);
+            font-size: 0.62rem;
+            font-weight: 700;
+        }
+
+        .mock-ai {
+            margin-top: 12px;
+            padding: 15px;
+            color: var(--white);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--emerald-800),
+                    var(--gold)
+                );
+            border-radius: 18px;
+        }
+
+        .mock-ai-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 0.82rem;
+            font-weight: 950;
+        }
+
+        .mock-ai-title span:last-child {
+            padding: 3px 8px;
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+            font-size: 0.62rem;
+        }
+
+        .mock-ai-text {
+            margin-top: 8px;
+            opacity: 0.88;
+            font-size: 0.7rem;
+            line-height: 1.6;
+        }
+
+        .float-badge {
+            position: absolute;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 14px;
+            color: var(--emerald-900);
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(23, 105, 90, 0.14);
+            border-radius: 999px;
+            box-shadow: var(--shadow-md);
+            font-size: 0.78rem;
+            font-weight: 950;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .float-badge::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .float-badge.ai-badge {
+            top: 72px;
+            left: 2%;
+            color: var(--white);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--emerald-700),
+                    var(--gold)
+                );
+        }
+
+        .float-badge.ai-badge::before {
+            background: var(--white);
+        }
+
+        .float-badge.qibla-badge {
+            bottom: 78px;
+            right: 0;
+            animation-delay: -1.5s;
         }
 
         .section {
-            padding: 50px 15px;
-            max-width: 1100px;
-            margin: 0 auto;
+            position: relative;
+            padding: 96px 0;
+        }
+
+        .section.alt {
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(239, 250, 246, 0.9),
+                    rgba(251, 252, 249, 0.98)
+                );
+        }
+
+        .section-head {
+            max-width: 720px;
+            margin-bottom: 44px;
+        }
+
+        .section-kicker {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: var(--gold);
+            font-size: 0.82rem;
+            font-weight: 950;
         }
 
         .section-title {
-            font-size: 32px;
-            font-weight: 900;
-            color: #c9a84c;
-            text-align: center;
-            margin-bottom: 15px;
+            color: var(--emerald-950);
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 950;
+            line-height: 1.2;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 70px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #c9a84c, transparent);
-            margin: 12px auto 0;
-            border-radius: 2px;
-        }
-
-        .section-desc {
-            text-align: center;
-            color: #8faa92;
-            font-size: 16px;
-            margin-bottom: 35px;
-            line-height: 1.8;
-            padding: 0 10px;
+        .section-description {
+            max-width: 680px;
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.9;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
         }
 
         .feature-card {
-            background: linear-gradient(135deg, rgba(26,58,42,0.7), rgba(13,40,24,0.85));
-            border: 1px solid rgba(201, 168, 76, 0.15);
-            border-radius: 16px;
-            padding: 25px 18px;
-            text-align: center;
-            transition: all 0.3s;
+            min-height: 220px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
         }
 
         .feature-card:hover {
-            border-color: rgba(201, 168, 76, 0.35);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+            border-color: rgba(35, 144, 116, 0.32);
+            box-shadow: var(--shadow-md);
         }
 
-        .feature-card .icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-            display: block;
+        .feature-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            color: var(--emerald-700);
+            background: var(--mint);
+            border: 1px solid rgba(35, 144, 116, 0.12);
+            border-radius: 18px;
+            font-size: 1.35rem;
+            font-weight: 950;
+            box-shadow: inset 0 0 0 5px rgba(54, 170, 138, 0.04);
+        }
+
+        .feature-icon.ai-icon {
+            color: var(--white);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--emerald-700),
+                    var(--gold)
+                );
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
         }
 
         .feature-card h3 {
-            font-size: 16px;
-            color: #f5e6b8;
-            margin-bottom: 6px;
-            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--emerald-950);
+            font-size: 1.08rem;
+            font-weight: 950;
         }
 
         .feature-card p {
-            color: #8faa92;
-            font-size: 13px;
-            line-height: 1.7;
+            color: var(--muted);
+            font-size: 0.88rem;
+            line-height: 1.8;
         }
 
-        .ai-box {
-            max-width: 800px;
-            margin: 30px auto;
-            background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), rgba(26,58,42,0.7));
-            border: 2px solid rgba(201, 168, 76, 0.35);
-            border-radius: 22px;
-            padding: 35px 25px;
-            text-align: center;
+        .ai-section {
+            overflow: hidden;
+            color: var(--white);
+            background:
+                radial-gradient(
+                    circle at 12% 18%,
+                    rgba(54, 170, 138, 0.24),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 88% 80%,
+                    rgba(209, 173, 98, 0.18),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    var(--emerald-950),
+                    var(--emerald-900)
+                );
+        }
+
+        .ai-section::before {
+            content: "۞";
+            position: absolute;
+            top: -70px;
+            left: 3%;
+            color: rgba(255, 255, 255, 0.035);
+            font-family: "Amiri", Tahoma, serif;
+            font-size: 20rem;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .ai-section .section-kicker {
+            color: var(--gold-light);
+        }
+
+        .ai-section .section-title {
+            color: var(--white);
+        }
+
+        .ai-section .section-description {
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .ai-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            align-items: center;
+            gap: 62px;
+        }
+
+        .ai-copy .section-head {
+            margin-bottom: 28px;
         }
 
         .ai-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #c9a84c, #dbb76a);
-            color: #1a3a2a;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 13px;
-            margin-bottom: 18px;
-        }
-
-        .ai-box h3 {
-            font-size: 28px;
-            color: #c9a84c;
-            margin-bottom: 12px;
-            font-weight: 900;
-        }
-
-        .ai-box p {
-            color: #e8d5a3;
-            font-size: 15px;
-            line-height: 1.9;
-            padding: 0 10px;
-        }
-
-        .ai-box .highlight {
-            color: #f5e6b8;
-            font-weight: 700;
-        }
-
-        .ai-tag {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(27, 94, 32, 0.3);
-            border: 1px solid rgba(67, 160, 71, 0.3);
-            padding: 10px 22px;
-            border-radius: 30px;
-            color: #c8e6c9;
-            font-weight: 600;
-            font-size: 14px;
-            margin-top: 20px;
+            margin-bottom: 17px;
+            padding: 7px 12px;
+            color: var(--emerald-950);
+            background: var(--gold-light);
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 950;
         }
 
-        .ai-tag .live-dot {
+        .ai-badge span {
             width: 8px;
             height: 8px;
-            background: #43a047;
+            background: var(--emerald-700);
             border-radius: 50%;
-            animation: pulse 1.5s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+        .ai-copy h2 {
+            margin-bottom: 15px;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 950;
+            line-height: 1.15;
         }
 
-        .no-ads {
-            max-width: 800px;
-            margin: 30px auto;
-            background: linear-gradient(135deg, #1b5e20, #2e7d32);
-            border: 2px solid rgba(67, 160, 71, 0.3);
-            border-radius: 18px;
-            padding: 30px 25px;
-            text-align: center;
+        .ai-copy h2 span {
+            color: var(--gold-light);
         }
 
-        .no-ads h3 {
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 8px;
-            font-weight: 900;
+        .ai-copy > p {
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.9;
         }
 
-        .no-ads p {
-            font-size: 15px;
-            color: #c8e6c9;
+        .ai-list {
+            display: grid;
+            gap: 11px;
+            margin-top: 24px;
+            list-style: none;
+        }
+
+        .ai-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 0.9rem;
+        }
+
+        .ai-list li::before {
+            content: "✓";
+            flex: 0 0 auto;
+            color: var(--gold-light);
+            font-weight: 950;
+        }
+
+        .chat-window {
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 28px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 17px 19px;
+            color: var(--white);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--emerald-700),
+                    var(--emerald-900)
+                );
+        }
+
+        .chat-header-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .chat-avatar {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--emerald-950);
+            background: var(--gold-light);
+            border-radius: 13px;
+            font-size: 0.82rem;
+            font-weight: 950;
+        }
+
+        .chat-header-title strong,
+        .chat-header-title small {
+            display: block;
+        }
+
+        .chat-header-title strong {
+            font-size: 0.9rem;
+        }
+
+        .chat-header-title small {
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 0.68rem;
+        }
+
+        .chat-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.68rem;
+            white-space: nowrap;
+        }
+
+        .chat-status::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            background: #8ff0c2;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(143, 240, 194, 0.12);
+        }
+
+        .chat-messages {
+            min-height: 300px;
+            max-height: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+            padding: 18px;
+            background:
+                radial-gradient(
+                    circle at 80% 0%,
+                    rgba(54, 170, 138, 0.08),
+                    transparent 28%
+                ),
+                #f8fcfa;
+        }
+
+        .message {
+            max-width: 88%;
+            padding: 11px 14px;
+            border-radius: 16px;
+            font-size: 0.86rem;
+            line-height: 1.65;
+        }
+
+        .message strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.7rem;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            color: var(--white);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--emerald-700),
+                    var(--emerald-600)
+                );
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            color: var(--text);
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-bottom-right-radius: 5px;
+        }
+
+        .question-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 18px 14px;
+        }
+
+        .question-chip {
+            padding: 7px 10px;
+            color: var(--emerald-800);
+            background: var(--mint);
+            border: 1px solid rgba(35, 144, 116, 0.14);
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .question-chip:hover {
+            color: var(--white);
+            background: var(--emerald-700);
+        }
+
+        .chat-form {
+            display: flex;
+            gap: 8px;
+            padding: 13px 18px 16px;
+            border-top: 1px solid var(--line);
+        }
+
+        .chat-input {
+            width: 100%;
+            min-width: 0;
+            padding: 12px 14px;
+            color: var(--text);
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            outline: 0;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--emerald-500);
+            box-shadow: 0 0 0 4px rgba(54, 170, 138, 0.1);
+        }
+
+        .chat-submit {
+            width: 46px;
+            height: 46px;
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            background: var(--emerald-700);
+            border: 0;
+            border-radius: 13px;
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .chat-submit:hover {
+            background: var(--emerald-600);
+            transform: translateX(-2px);
+        }
+
+        .chat-note {
+            padding: 0 18px 17px;
+            color: var(--muted);
+            font-size: 0.7rem;
+            line-height: 1.6;
+        }
+
+        .download-panel {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+            align-items: center;
+            gap: 55px;
+            padding: 52px;
+            color: var(--white);
+            background:
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(209, 173, 98, 0.2),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    var(--emerald-900),
+                    var(--emerald-950)
+                );
+            border-radius: 34px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .download-panel::before {
+            content: "۞";
+            position: absolute;
+            top: -90px;
+            right: 3%;
+            color: rgba(255, 255, 255, 0.04);
+            font-family: "Amiri", Tahoma, serif;
+            font-size: 15rem;
+            line-height: 1;
+        }
+
+        .download-content,
+        .download-list {
+            position: relative;
+            z-index: 1;
+        }
+
+        .download-content .section-kicker {
+            color: var(--gold-light);
+        }
+
+        .download-content h2 {
+            margin-bottom: 14px;
+            font-size: clamp(2rem, 5vw, 3.3rem);
+            font-weight: 950;
+            line-height: 1.2;
+        }
+
+        .download-content p {
+            max-width: 590px;
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.9;
+        }
+
+        .download-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .download-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .download-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.11);
+            border-radius: 17px;
+        }
+
+        .download-item-icon {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--emerald-950);
+            background: var(--gold-light);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 950;
+        }
+
+        .download-item strong,
+        .download-item small {
+            display: block;
+        }
+
+        .download-item strong {
+            font-size: 0.88rem;
+        }
+
+        .download-item small {
+            margin-top: 3px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 0.72rem;
+            line-height: 1.5;
+        }
+
+        .site-footer {
+            padding: 45px 0 25px;
+            color: rgba(255, 255, 255, 0.72);
+            background: #061d19;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr 0.7fr;
+            gap: 38px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+        }
+
+        .footer-brand img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+        .footer-brand strong,
+        .footer-brand p {
+            display: block;
+        }
+
+        .footer-brand strong {
+            color: var(--white);
+            font-size: 1.08rem;
+        }
+
+        .footer-brand p {
+            max-width: 360px;
+            margin-top: 5px;
+            font-size: 0.8rem;
             line-height: 1.7;
         }
 
-        .download-section {
-            padding: 60px 20px;
-            text-align: center;
-            background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 60%);
-            border-top: 1px solid rgba(201, 168, 76, 0.15);
-        }
-
-        .download-section h2 {
-            font-size: 36px;
-            color: #c9a84c;
-            margin-bottom: 12px;
+        .footer-heading {
+            margin-bottom: 13px;
+            color: var(--white);
+            font-size: 0.9rem;
             font-weight: 900;
         }
 
-        .download-section > p {
-            font-size: 17px;
-            color: #8faa92;
-            margin-bottom: 30px;
-            padding: 0 10px;
+        .footer-links {
+            display: grid;
+            gap: 8px;
         }
 
-        .download-section .btn-group {
-            margin-bottom: 15px;
+        .footer-links button,
+        .footer-links a {
+            width: fit-content;
+            padding: 0;
+            color: rgba(255, 255, 255, 0.68);
+            background: transparent;
+            border: 0;
+            font-size: 0.8rem;
+            text-align: right;
+            transition: color 0.2s ease;
         }
 
-        .footer {
-            background: #030805;
-            padding: 30px 15px;
-            text-align: center;
-            border-top: 1px solid rgba(201, 168, 76, 0.1);
+        .footer-links button:hover,
+        .footer-links a:hover {
+            color: var(--gold-light);
         }
 
-        .footer p { color: #3d5a42; font-size: 13px; }
-        .footer .dev { color: #c9a84c; font-weight: 700; font-size: 15px; margin-top: 5px; }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(3, 8, 5, 0.97);
-            z-index: 2000;
-            justify-content: center;
+        .footer-bottom {
+            display: flex;
             align-items: center;
-            padding: 20px;
+            justify-content: space-between;
+            gap: 16px;
+            padding-top: 22px;
+            color: rgba(255, 255, 255, 0.48);
+            font-size: 0.72rem;
         }
 
-        .modal-overlay.active { display: flex; }
+        .support-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(4, 20, 17, 0.72);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .support-modal[hidden] {
+            display: none;
+        }
 
         .modal-box {
-            background: linear-gradient(135deg, rgba(26,58,42,0.95), rgba(10,26,15,0.98));
-            border: 2px solid rgba(201, 168, 76, 0.3);
-            border-radius: 22px;
-            padding: 40px 25px;
-            max-width: 440px;
-            width: 100%;
-            text-align: center;
             position: relative;
-            max-height: 90vh;
+            width: min(530px, 100%);
+            max-height: calc(100vh - 40px);
             overflow-y: auto;
+            padding: 31px;
+            color: var(--text);
+            background: var(--white);
+            border: 1px solid rgba(23, 105, 90, 0.12);
+            border-radius: 28px;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
+            animation: modal-in 0.25s ease both;
         }
 
         .modal-close {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            width: 38px;
-            height: 38px;
-            background: rgba(201, 168, 76, 0.1);
-            border: 2px solid rgba(201, 168, 76, 0.3);
-            border-radius: 50%;
-            color: #c9a84c;
-            font-size: 16px;
-            cursor: pointer;
+            top: 16px;
+            left: 16px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Cairo', sans-serif;
-            transition: all 0.3s;
+            color: var(--muted);
+            background: var(--mint);
+            border: 0;
+            border-radius: 12px;
+            font-size: 1.35rem;
+            line-height: 1;
+            transition:
+                color 0.2s ease,
+                background 0.2s ease;
         }
 
         .modal-close:hover {
-            background: #c9a84c;
-            color: #1a3a2a;
+            color: var(--danger);
+            background: #fff3f1;
         }
 
-        .modal-icon { font-size: 40px; margin-bottom: 10px; }
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            color: var(--white);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--emerald-700),
+                    var(--gold)
+                );
+            border-radius: 20px;
+            box-shadow: 0 14px 28px rgba(17, 83, 71, 0.2);
+            font-size: 1.35rem;
+            font-weight: 950;
+        }
 
         .modal-box h2 {
-            font-size: 26px;
-            color: #c9a84c;
-            margin-bottom: 10px;
+            margin-bottom: 9px;
+            color: var(--emerald-950);
+            font-size: 1.7rem;
+            font-weight: 950;
+        }
+
+        .modal-box > p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.85;
+        }
+
+        .payment-box {
+            margin: 22px 0;
+            padding: 18px;
+            background: var(--mint);
+            border: 1px solid rgba(35, 144, 116, 0.16);
+            border-radius: 18px;
+        }
+
+        .payment-label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--emerald-800);
+            font-size: 0.78rem;
             font-weight: 900;
         }
 
-        .modal-box .modal-text {
-            color: #8faa92;
-            font-size: 14px;
-            line-height: 1.9;
-            margin-bottom: 20px;
-            padding: 0 5px;
+        .payment-number {
+            display: block;
+            color: var(--emerald-950);
+            font-size: 1.75rem;
+            font-weight: 950;
+            line-height: 1.3;
+            letter-spacing: 0.08em;
         }
 
-        .vodafone-box {
-            background: linear-gradient(135deg, rgba(27, 94, 32, 0.4), rgba(27, 94, 32, 0.15));
-            border: 2px solid rgba(67, 160, 71, 0.3);
-            border-radius: 14px;
-            padding: 22px;
-            margin: 20px 0;
-        }
-
-        .vodafone-box .label { font-size: 14px; color: #8faa92; margin-bottom: 8px; }
-
-        .vodafone-box .num {
-            font-size: 30px;
+        .copy-button {
+            margin-top: 13px;
+            padding: 8px 13px;
+            color: var(--emerald-800);
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 0.76rem;
             font-weight: 900;
-            color: #fff;
-            direction: ltr;
-            letter-spacing: 2px;
+            transition:
+                border-color 0.2s ease,
+                color 0.2s ease;
         }
 
-        .vodafone-box .label2 { font-size: 13px; color: #c9a84c; margin-top: 6px; }
-
-        .thanks { font-size: 20px; color: #c9a84c; font-weight: 700; margin: 20px 0 5px; }
-        .thanks-sub { font-size: 14px; color: #8faa92; }
-
-        .ps-box {
-            background: rgba(201, 168, 76, 0.06);
-            border: 1px solid rgba(201, 168, 76, 0.2);
-            border-radius: 14px;
-            padding: 20px;
-            margin-top: 20px;
+        .copy-button:hover {
+            color: var(--white);
+            background: var(--emerald-700);
+            border-color: var(--emerald-700);
         }
 
-        .ps-box .ps-icon { font-size: 26px; margin-bottom: 8px; display: block; }
-        .ps-box p { color: #e8d5a3; font-size: 14px; line-height: 1.9; }
+        .support-message {
+            padding: 15px 16px;
+            color: var(--muted);
+            background: #fff9ea;
+            border: 1px solid rgba(209, 173, 98, 0.28);
+            border-radius: 15px;
+            font-size: 0.82rem;
+            line-height: 1.8;
+        }
+
+        .support-message strong {
+            color: #806126;
+        }
 
         .toast {
             position: fixed;
-            bottom: 30px;
+            bottom: 24px;
             left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: linear-gradient(135deg, #0d47a1, #1565c0);
-            color: #fff;
-            padding: 16px 30px;
-            border-radius: 14px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            z-index: 3000;
-            box-shadow: 0 8px 30px rgba(13, 71, 161, 0.5);
-            border: 1px solid rgba(66, 165, 245, 0.4);
+            z-index: 2000;
+            padding: 11px 17px;
+            color: var(--white);
+            background: var(--emerald-900);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            font-size: 0.82rem;
+            font-weight: 900;
             opacity: 0;
-            transition: all 0.4s ease;
-            text-align: center;
-            max-width: 90%;
+            pointer-events: none;
+            transform: translate(-50%, 18px);
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease;
         }
 
         .toast.show {
-            transform: translateX(-50%) translateY(0);
             opacity: 1;
+            transform: translate(-50%, 0);
         }
 
-        .toast i {
-            margin-left: 8px;
-            color: #90caf9;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(3, 8, 5, 0.98);
-            z-index: 1500;
-            padding: 60px 30px 30px;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .mobile-menu.active { display: flex; }
-
-        .mobile-menu a {
-            color: #e8d5a3;
-            text-decoration: none;
-            font-size: 22px;
-            font-weight: 700;
-            padding: 12px 30px;
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
-
-        .mobile-menu a:hover {
-            background: rgba(201, 168, 76, 0.1);
-            color: #c9a84c;
-        }
-
-        .mobile-menu .close-menu {
+        .sr-only {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: #c9a84c;
-            font-size: 28px;
-            cursor: pointer;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
-        .scroll-top {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #c9a84c, #dbb76a);
-            border: none;
-            border-radius: 50%;
-            color: #1a3a2a;
-            font-size: 18px;
-            cursor: pointer;
-            z-index: 999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
-        }
-
-        .scroll-top.visible { display: flex; }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .mobile-toggle { display: block; }
-
-            .hero { padding: 40px 15px 35px; }
-            .hero-logo { width: 120px; height: 120px; }
-            .hero h1 { font-size: 40px; }
-            .hero .subtitle { font-size: 18px; }
-            .hero .desc { font-size: 14px; }
-
-            .btn-group {
-                flex-direction: column;
-                align-items: center;
-                gap: 12px;
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
             }
 
-            .btn-download, .btn-support, .btn-windows {
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slow-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes slow-spin-reverse {
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+
+        @keyframes modal-in {
+            from {
+                opacity: 0;
+                transform: translateY(14px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(209, 173, 98, 0.7);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 1000px) {
+            .hero-grid,
+            .ai-grid {
+                gap: 38px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .download-panel {
+                gap: 38px;
+                padding: 42px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                width: calc(100% - 28px);
+            }
+
+            .developer-bar {
+                font-size: 0.75rem;
+            }
+
+            .header-inner {
+                min-height: 68px;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 48px;
+                border-radius: 15px;
+            }
+
+            .brand-name {
+                font-size: 1.08rem;
+            }
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .site-nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 52px 0 66px;
+            }
+
+            .hero-grid,
+            .ai-grid {
+                display: block;
+            }
+
+            .app-title {
+                font-size: clamp(3.6rem, 18vw, 5.5rem);
+            }
+
+            .hero-description {
+                margin-top: 18px;
+                font-size: 0.96rem;
+            }
+
+            .hero-points {
+                margin-top: 18px;
+            }
+
+            .hero-point {
+                font-size: 0.74rem;
+            }
+
+            .hero-actions {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin-top: 23px;
+            }
+
+            .btn {
+                min-height: 54px;
+                padding: 12px 9px;
+                border-radius: 14px;
+                font-size: 0.79rem;
+            }
+
+            .button-subtitle {
+                font-size: 0.64rem;
+            }
+
+            .direct-note {
+                font-size: 0.74rem;
+            }
+
+            .windows-row {
+                display: grid;
+                grid-template-columns: 1fr;
+                margin-top: 14px;
+            }
+
+            .windows-button {
                 width: 100%;
-                max-width: 320px;
-                padding: 15px 25px;
-                font-size: 16px;
             }
 
-            .section { padding: 40px 12px; }
-            .section-title { font-size: 26px; }
-            .section-desc { font-size: 14px; }
-
-            .features-grid { grid-template-columns: 1fr; gap: 12px; }
-            .feature-card { padding: 20px 15px; }
-
-            .ai-box { padding: 25px 18px; }
-            .ai-box h3 { font-size: 24px; }
-            .ai-box p { font-size: 14px; }
-
-            .download-section h2 { font-size: 28px; }
-            .modal-box { padding: 35px 20px; }
-            .vodafone-box .num { font-size: 26px; }
-            .no-ads { padding: 25px 18px; }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 34px; }
-            .hero .subtitle { font-size: 16px; }
-            .hero-logo { width: 100px; height: 100px; }
-            .btn-download, .btn-support, .btn-windows {
-                padding: 14px 20px;
-                font-size: 15px;
+            .hero-visual {
+                min-height: 450px;
+                margin-top: 18px;
             }
-            .feature-card .icon { font-size: 28px; }
-            .feature-card h3 { font-size: 15px; }
+
+            .phone-mockup {
+                width: min(310px, 92%);
+                transform: none;
+            }
+
+            .phone-screen {
+                min-height: 460px;
+                padding: 18px 14px 15px;
+            }
+
+            .phone-greeting {
+                margin-top: 22px;
+                font-size: 1.1rem;
+            }
+
+            .mock-card {
+                margin-top: 18px;
+                padding: 15px;
+            }
+
+            .mock-verse {
+                font-size: 1.08rem;
+            }
+
+            .mock-tile {
+                min-height: 68px;
+                font-size: 0.66rem;
+            }
+
+            .mock-tile small {
+                font-size: 0.56rem;
+            }
+
+            .float-badge {
+                padding: 8px 10px;
+                font-size: 0.68rem;
+            }
+
+            .float-badge.ai-badge {
+                top: 42px;
+                left: 0;
+            }
+
+            .float-badge.qibla-badge {
+                bottom: 48px;
+            }
+
+            .section {
+                padding: 68px 0;
+            }
+
+            .section-head {
+                margin-bottom: 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 13px;
+            }
+
+            .feature-card {
+                min-height: auto;
+                padding: 21px;
+            }
+
+            .ai-grid {
+                display: block;
+            }
+
+            .ai-copy {
+                text-align: center;
+            }
+
+            .ai-list {
+                margin-inline: auto;
+                max-width: 420px;
+                text-align: right;
+            }
+
+            .chat-window {
+                margin-top: 30px;
+            }
+
+            .chat-messages {
+                min-height: 280px;
+                max-height: 320px;
+                padding: 14px;
+            }
+
+            .message {
+                max-width: 94%;
+                font-size: 0.8rem;
+            }
+
+            .question-chips {
+                padding-inline: 14px;
+            }
+
+            .chat-form {
+                padding-inline: 14px;
+            }
+
+            .chat-note {
+                padding-inline: 14px;
+            }
+
+            .download-panel {
+                display: block;
+                padding: 30px 22px;
+                border-radius: 26px;
+            }
+
+            .download-actions {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .download-item {
+                padding: 13px;
+            }
+
+            .footer-grid {
+                display: block;
+            }
+
+            .footer-grid > div {
+                margin-bottom: 25px;
+            }
+
+            .footer-bottom {
+                display: block;
+                text-align: center;
+            }
+
+            .footer-bottom span + span {
+                display: block;
+                margin-top: 5px;
+            }
+
+            .modal-box {
+                padding: 27px 20px 22px;
+                border-radius: 23px;
+            }
+
+            .payment-number {
+                font-size: 1.45rem;
+            }
         }
 
-        @media (max-width: 768px) {
-            body, a, button { -webkit-user-select: none; user-select: none; }
+        @media (max-width: 420px) {
+            .app-title {
+                font-size: 3.45rem;
+            }
+
+            .hero-actions,
+            .download-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .hero-visual {
+                min-height: 420px;
+            }
+
+            .float-badge {
+                font-size: 0.62rem;
+            }
+
+            .chat-header {
+                padding: 14px;
+            }
+
+            .chat-header-title small {
+                display: none;
+            }
+
+            .chat-status {
+                font-size: 0.62rem;
+            }
+
+            .modal-box {
+                padding-inline: 17px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
+
 <body>
+    <a class="skip-link" href="#main">انتقل إلى المحتوى</a>
 
-    <!-- TOP BAR -->
-    <div class="top-bar">
-        <span><i class="fas fa-user-shield"></i> المطور: عمر ابراهيم</span>
+    <div class="developer-bar">
+        <div class="container">
+            المطور: <strong>عمر ابراهيم</strong>
+        </div>
     </div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <a href="#" class="navbar-brand">
-            <img src="https://cdn.phototourl.com/free/2026-09-13-a5e8961d-6ab3-4575-8995-f0606ec48ffc.jpg" alt="صحبة">
-            <span>صحبة</span>
-        </a>
-        <button class="mobile-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
-        <ul class="nav-links">
-            <li><a href="#features">المميزات</a></li>
-            <li><a href="#ai">صحبة AI</a></li>
-            <li><a href="#download">تحميل</a></li>
-            <li><a href="#support" onclick="openSupport(event)">الدعم</a></li>
-        </ul>
-    </nav>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#main" aria-label="صحبة — الصفحة الرئيسية">
+                <img
+                    class="brand-logo"
+                    src="https://cdn.phototourl.com/free/2026-09-13-a5e8961d-6ab3-4575-8995-f0606ec48ffc.jpg"
+                    alt="شعار تطبيق صحبة"
+                    width="64"
+                    height="64"
+                >
 
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="close-menu" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
-        <a href="#features" onclick="toggleMenu()">المميزات</a>
-        <a href="#ai" onclick="toggleMenu()">صحبة AI</a>
-        <a href="#download" onclick="toggleMenu()">تحميل</a>
-        <a href="#support" onclick="openSupport(event); toggleMenu();">الدعم</a>
-    </div>
-
-    <!-- HERO -->
-    <section class="hero" id="home">
-        <img src="https://cdn.phototourl.com/free/2026-09-13-a5e8961d-6ab3-4575-8995-f0606ec48ffc.jpg" alt="لوجو صحبة" class="hero-logo">
-        <h1>صحبة</h1>
-        <p class="subtitle">تطبيق قراني شامل</p>
-        <p class="desc">صاحبك في القرآن الكريم — كل ما تحتاجه في تطبيق واحد نقي بدون أي إعلانات</p>
-        <div class="btn-group">
-            <a href="https://www.mediafire.com/file/6tbdoi3oulj2k6e/sohba.quran-v1.2.apk/file" target="_blank" rel="noopener noreferrer" class="btn-download">
-                <i class="fas fa-download"></i> تحميل للأندرويد
+                <span class="brand-copy">
+                    <span class="brand-name">صحبة</span>
+                    <span class="brand-subtitle">تطبيق قراني متكامل</span>
+                </span>
             </a>
-            <a href="#support" onclick="openSupport(event)" class="btn-support">
-                <i class="fas fa-hands-helping"></i> ادعمنا
-            </a>
-        </div>
-    </section>
 
-    <!-- FEATURES -->
-    <section class="section" id="features">
-        <h2 class="section-title">المميزات</h2>
-        <p class="section-desc">تطبيق قراني متكامل يجمع لك أدوات العبادة والاستذكار في مكان واحد</p>
-        <div class="features-grid">
-            <div class="feature-card">
-                <span class="icon">🕐</span>
-                <h3>مواقيت الصلاة</h3>
-                <p>مواقيت صلاة دقيقة حسب موقعك مع التنبيهات</p>
+            <nav class="site-nav" aria-label="التنقل الرئيسي">
+                <a href="#features">المميزات</a>
+                <a href="#ai">محادثة AI</a>
+                <a href="#download">التحميل</a>
+                <button
+                    class="nav-support"
+                    type="button"
+                    data-open-support
+                >
+                    الدعم
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <div class="eyebrow">
+                        <span class="eyebrow-dot"></span>
+                        تطبيق قراني متكامل
+                    </div>
+
+                    <h1 class="app-title">
+                        صحبة
+                        <span>معك في كل يوم</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        تطبيق <strong>صحبة</strong> يجمع القرآن الكريم، مواقيت الصلاة،
+                        تفسير الآيات، الأذكار، الأدعية، السيرة النبوية، القبلة، السبحة،
+                        والأذان في تجربة واحدة هادئة ومناسبة لك ولأسرتك.
+                    </p>
+
+                    <div class="hero-points" aria-label="أهم مميزات التطبيق">
+                        <span class="hero-point"><span>✓</span> مواقيت صلاة</span>
+                        <span class="hero-point"><span>✓</span> القرآن الكريم</span>
+                        <span class="hero-point"><span>✓</span> تفسير الآيات</span>
+                        <span class="hero-point"><span>✓</span> صحبة AI</span>
+                        <span class="hero-point"><span>✓</span> بدون إعلانات</span>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a
+                            class="btn btn-primary"
+                            href="https://www.mediafire.com/file/5uk9qtsf9c6gzg8/sohba.quran-1.3.apk/file"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="تحديث أو تحميل للاندوريد"
+                        >
+                            <span class="button-main">
+                                تحديث أو تحميل للاندوريد
+                            </span>
+                            <span class="button-subtitle">
+                                APK مباشر خارج Play
+                            </span>
+                        </a>
+
+                        <button
+                            class="btn btn-secondary"
+                            type="button"
+                            data-open-support
+                            aria-label="الدعم والمساهمة"
+                        >
+                            الدعم والمساهمة
+                        </button>
+                    </div>
+
+                    <p class="direct-note">
+                        <strong>تحميل مباشر خارج متجر Google Play.</strong>
+                        التطبيق مصمم ليكون بلا إعلانات.
+                    </p>
+
+                    <div class="windows-row">
+                        <button
+                            class="windows-button"
+                            id="windowsButton"
+                            type="button"
+                        >
+                            تحميل للويندوز
+                        </button>
+
+                        <span class="windows-note">
+                            نسخة الويندوز قريباً إن شاء الله
+                        </span>
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <span class="visual-orbit orbit-one"></span>
+                    <span class="visual-orbit orbit-two"></span>
+
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+
+                        <div class="phone-screen">
+                            <div class="phone-top">
+                                <span class="phone-brand">
+                                    <img
+                                        src="https://cdn.phototourl.com/free/2026-09-13-a5e8961d-6ab3-4575-8995-f0606ec48ffc.jpg"
+                                        alt=""
+                                        width="38"
+                                        height="38"
+                                    >
+                                    <span>صحبة</span>
+                                </span>
+
+                                <span class="phone-status">
+                                    تطبيق قراني
+                                </span>
+                            </div>
+
+                            <div class="phone-greeting">
+                                القرآن معك أينما كنت
+                            </div>
+
+                            <div class="phone-subtitle">
+                                تجربة هادئة، كاملة، ومن دون إعلانات
+                            </div>
+
+                            <div class="mock-card">
+                                <div class="mock-card-label">
+                                    <span>القرآن الكريم</span>
+                                    <span>تفسير</span>
+                                </div>
+
+                                <div class="mock-verse">
+                                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                                </div>
+
+                                <div class="mock-card-footer">
+                                    <span>اختر الآية لعرض التفسير</span>
+                                    <span class="mock-footer-button">اكتشف</span>
+                                </div>
+                            </div>
+
+                            <div class="mock-grid">
+                                <div class="mock-tile">
+                                    مواقيت الصلاة
+                                    <small>دقيقة وواضحة</small>
+                                </div>
+
+                                <div class="mock-tile">
+                                    اتجاه القبلة
+                                    <small>ببساطة وسهولة</small>
+                                </div>
+
+                                <div class="mock-tile">
+                                    سبحة رقمية
+                                    <small>عدّاد سريع</small>
+                                </div>
+
+                                <div class="mock-tile">
+                                    أذكار وأدعية
+                                    <small>مع التذكير</small>
+                                </div>
+                            </div>
+
+                            <div class="mock-ai">
+                                <div class="mock-ai-title">
+                                    <span>صحبة AI</span>
+                                    <span>متاح</span>
+                                </div>
+
+                                <div class="mock-ai-text">
+                                    اسأل عن القرآن، الصلاة، الأذكار،
+                                    الأدعية، والسيرة النبوية.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="float-badge ai-badge">
+                        محادثة ذكية
+                    </span>
+
+                    <span class="float-badge qibla-badge">
+                        بلا إعلانات
+                    </span>
+                </div>
             </div>
-            <div class="feature-card">
-                <span class="icon">📖</span>
-                <h3>القرآن الكريم</h3>
-                <p>جميع السور مع تفسير كل آية بوضوح</p>
+        </section>
+
+        <section class="section" id="features">
+            <div class="container">
+                <div class="section-head">
+                    <span class="section-kicker">
+                        كل ما تحتاجه في مكان واحد
+                    </span>
+
+                    <h2 class="section-title">
+                        تجربة قرانية متكاملة
+                    </h2>
+
+                    <p class="section-description">
+                        صممنا تطبيق صحبة ليكون رفيقك اليومي في القراءة، الصلاة،
+                        الذكر، التعلم، والبحث عن المعلومات الدينية بشكل سهل وواضح.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            ص
+                        </div>
+
+                        <h3>مواقيت الصلاة</h3>
+                        <p>
+                            مواقيت صلاة واضحة ومناسبة لموقعك، مع عرض اليوم والغد
+                            وطريقة الوصول إلى الصلاة التالية.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            ۞
+                        </div>
+
+                        <h3>جميع سور القرآن الكريم</h3>
+                        <p>
+                            جميع سور القرآن الكريم مع عرض الآيات بطريقة مريحة للقراءة
+                            والبحث والانتقال بين السور والآيات.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            ت
+                        </div>
+
+                        <h3>تفسير أي آية</h3>
+                        <p>
+                            إمكانية اختيار أي آية لعرض تفسيرها ومعلومات مساعدة تساعدك
+                            على فهم المعنى والسياق بشكل أوضح.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon ai-icon" aria-hidden="true">
+                            AI
+                        </div>
+
+                        <h3>صحبة AI</h3>
+                        <p>
+                            ميزة محادثة ذكية للإجابة عن الاستفسارات العامة في القرآن،
+                            الصلاة، الأذكار، الأدعية، والسيرة النبوية.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            س
+                        </div>
+
+                        <h3>سبحة رقمية</h3>
+                        <p>
+                            سبحة سهلة وسريعة بعدد قابل للتعديل، مع إمكانية إعادة العداد
+                            والانتقال بين الأذكار.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            ق
+                        </div>
+
+                        <h3>اتجاه القبلة</h3>
+                        <p>
+                            أداة اتجاه القبلة لمساعدة المستخدم على معرفة الاتجاه الصحيح
+                            أثناء الصلاة من wherever يوجد.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            ذ
+                        </div>
+
+                        <h3>أذكار وأدعية</h3>
+                        <p>
+                            مجموعة من أذكار الصباح والمساء، أذكار الصلاة، الأدعية
+                            المختارة، والذكر مع تذكيرات هادئة.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            س
+                        </div>
+
+                        <h3>السيرة النبوية</h3>
+                        <p>
+                            محتوى مبسط عن سيرة النبي ﷺ وأهم الأحداث والشخصيات،
+                            مع عرض مناسب للقراءة على الهاتف.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            ♪
+                        </div>
+
+                        <h3>ميزة الأذان</h3>
+                        <p>
+                            إعدادات الأذان والتنبيهات الصوتية لمواقيت الصلاة، مع إمكانية
+                            تخصيص التجربة حسب الحاجة.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            ✓
+                        </div>
+
+                        <h3>تجربة بلا إعلانات</h3>
+                        <p>
+                            واجهة هادئة وخالية من الإعلانات المزعجة، حتى تكون القراءة
+                            والعبادة والمعرفة في بيئة مريحة.
+                        </p>
+                    </article>
+                </div>
             </div>
-            <div class="feature-card">
-                <span class="icon">🤲</span>
-                <h3>السبحة</h3>
-                <p>سبحة رقمية مع عداد وحساب الحمد</p>
+        </section>
+
+        <section class="section ai-section" id="ai">
+            <div class="container ai-grid">
+                <div class="ai-copy">
+                    <div class="section-head">
+                        <span class="ai-badge">
+                            <span></span>
+                            ميزة مميزة في تطبيق صحبة
+                        </span>
+
+                        <h2>
+                            <span>صحبة AI</span>
+                            مساعدك القراني
+                        </h2>
+
+                        <p>
+                            اسأل صحبة AI عن القرآن الكريم، تفسير الآيات، مواقيت الصلاة،
+                            الأذكار، الأدعية، السيرة النبوية، والقبلة. صُممت المحادثة
+                            لتكون سريعة وواضحة ومناسبة للاستخدام اليومي.
+                        </p>
+
+                        <ul class="ai-list">
+                            <li>إجابات عامة وسريعة على الأسئلة الدينية الشائعة.</li>
+                            <li>طريقة سهلة لطلب تفسير أي آية داخل التطبيق.</li>
+                            <li>مساعدة في الأذكار، الأدعية، والسيرة النبوية.</li>
+                            <li>تجربة محادثة مريحة على الهاتف.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="chat-window" aria-label="محادثة تجريبية مع صحبة AI">
+                    <div class="chat-header">
+                        <div class="chat-header-title">
+                            <span class="chat-avatar">AI</span>
+
+                            <span>
+                                <strong>صحبة AI</strong>
+                                <small>مساعد قراني ذكي</small>
+                            </span>
+                        </div>
+
+                        <span class="chat-status">متصل</span>
+                    </div>
+
+                    <div
+                        class="chat-messages"
+                        id="chatMessages"
+                        aria-live="polite"
+                    >
+                        <div class="message bot">
+                            <strong>صحبة AI</strong>
+                            <span>
+                                أهلاً بك! اسألني عن القرآن، تفسير الآيات، الصلاة،
+                                الأذكار، الأدعية، السيرة النبوية، أو أي موضوع
+                                ديني عام.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="question-chips" aria-label="أسئلة مقترحة">
+                        <button
+                            class="question-chip"
+                            type="button"
+                            data-question="ما مميزات تطبيق صحبة؟"
+                        >
+                            ما مميزات التطبيق؟
+                        </button>
+
+                        <button
+                            class="question-chip"
+                            type="button"
+                            data-question="كيف أقرأ تفسير الآية؟"
+                        >
+                            تفسير الآية
+                        </button>
+
+                        <button
+                            class="question-chip"
+                            type="button"
+                            data-question="هل التطبيق يحتوي على إعلانات؟"
+                        >
+                            هل فيه إعلانات؟
+                        </button>
+
+                        <button
+                            class="question-chip"
+                            type="button"
+                            data-question="كيف أحصل على التطبيق؟"
+                        >
+                            تحميل التطبيق
+                        </button>
+
+                        <button
+                            class="question-chip"
+                            type="button"
+                            data-question="متى تتوفر نسخة الويندوز؟"
+                        >
+                            نسخة الويندوز
+                        </button>
+                    </div>
+
+                    <form class="chat-form" id="chatForm">
+                        <label class="sr-only" for="chatInput">
+                            اكتب سؤالك
+                        </label>
+
+                        <input
+                            class="chat-input"
+                            id="chatInput"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="اكتب سؤالك عن الدين..."
+                            maxlength="300"
+                        >
+
+                        <button
+                            class="chat-submit"
+                            type="submit"
+                            aria-label="إرسال السؤال"
+                        >
+                            <svg
+                                width="19"
+                                height="19"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M5 12H19M19 12L14 7M19 12L14 17"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </button>
+                    </form>
+
+                    <p class="chat-note">
+                        ملاحظة: الإجابات المتاحة هنا إجابات عامة وتثقيفية، وليست
+                        بديلاً عن الاستفتاء لدى عالم مؤهل في المسائل التفصيلية.
+                    </p>
+                </div>
             </div>
-            <div class="feature-card">
-                <span class="icon">🧭</span>
-                <h3>القبلة</h3>
-                <p>معرفة اتجاه القبلة من موقعك في أي مكان</p>
+        </section>
+
+        <section class="section alt" id="download">
+            <div class="container">
+                <div class="download-panel">
+                    <div class="download-content">
+                        <span class="section-kicker">
+                            جاهز للاستخدام
+                        </span>
+
+                        <h2>
+                            اصحب القرآن
+                            في يومك
+                        </h2>
+
+                        <p>
+                            حمّل تطبيق صحبة واستمتع بتجربة قرانية متكاملة، هادئة،
+                            ومن دون إعلانات. استخدم زر التحميل للوصول مباشرة إلى
+                            إصدار Android APK.
+                        </p>
+
+                        <div class="download-actions">
+                            <a
+                                class="btn btn-primary"
+                                href="https://www.mediafire.com/file/5uk9qtsf9c6gzg8/sohba.quran-1.3.apk/file"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="تحديث أو تحميل للاندوريد"
+                            >
+                                <span class="button-main">
+                                    تحديث أو تحميل للاندوريد
+                                </span>
+                                <span class="button-subtitle">
+                                    APK مباشر
+                                </span>
+                            </a>
+
+                            <button
+                                class="btn btn-secondary"
+                                type="button"
+                                data-open-support
+                            >
+                                الدعم والمساهمة
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="download-list">
+                        <div class="download-item">
+                            <span class="download-item-icon">✓</span>
+
+                            <span>
+                                <strong>خارج متجر Google Play</strong>
+                                <small>رابط مباشر لإصدار APK</small>
+                            </span>
+                        </div>
+
+                        <div class="download-item">
+                            <span class="download-item-icon">۞</span>
+
+                            <span>
+                                <strong>جميع سور القرآن الكريم</strong>
+                                <small>مع تفسير كل آية داخل التطبيق</small>
+                            </span>
+                        </div>
+
+                        <div class="download-item">
+                            <span class="download-item-icon">AI</span>
+
+                            <span>
+                                <strong>صحبة AI</strong>
+                                <small>محادثة ذكية للاستفسارات الدينية العامة</small>
+                            </span>
+                        </div>
+
+                        <div class="download-item">
+                            <span class="download-item-icon">✓</span>
+
+                            <span>
+                                <strong>بدون إعلانات</strong>
+                                <small>تجربة مريحة للعبادة والقراءة</small>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="feature-card">
-                <span class="icon">📿</span>
-                <h3>الأذكار والأدعية</h3>
-                <p>أذكار وأدعية نبوية يومية شاملة</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <img
+                            src="https://cdn.phototourl.com/free/2026-09-13-a5e8961d-6ab3-4575-8995-f0606ec48ffc.jpg"
+                            alt="شعار تطبيق صحبة"
+                            width="52"
+                            height="52"
+                        >
+
+                        <span>
+                            <strong>صحبة</strong>
+                            <p>
+                                تطبيق قراني يساعدك على قراءة القرآن، معرفة مواقيت
+                                الصلاة، الذكر، الدعاء، والتعلم في مكان واحد.
+                            </p>
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="footer-heading">روابط مهمة</h3>
+
+                    <div class="footer-links">
+                        <a href="#features">مميزات التطبيق</a>
+                        <a href="#ai">محادثة صحبة AI</a>
+                        <a href="#download">تحميل التطبيق</a>
+                        <button
+                            type="button"
+                            data-open-support
+                        >
+                            الدعم والمساهمة
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="footer-heading">المطور</h3>
+
+                    <div class="footer-links">
+                        <span>عمر ابراهيم</span>
+                        <span>تطبيق صحبة</span>
+                    </div>
+                </div>
             </div>
-            <div class="feature-card">
-                <span class="icon">🌙</span>
-                <h3>السنة النبوية</h3>
-                <p>أحاديث وأثار من السنة مع شرحها</p>
-            </div>
-            <div class="feature-card">
-                <span class="icon">🔊</span>
-                <h3>ميزة الأذان</h3>
-                <p>الأذان بأصوات قرّاء مشاهير مع التنبيهات</p>
-            </div>
-            <div class="feature-card">
-                <span class="icon">✨</span>
-                <h3>بدون إعلانات</h3>
-                <p>تطبيق نقي خالي تماماً من أي إعلانات</p>
+
+            <div class="footer-bottom">
+                <span>
+                    جميع الحقوق محفوظة لتطبيق صحبة © <span id="currentYear"></span>
+                </span>
+
+                <span>
+                    المطور: عمر ابراهيم
+                </span>
             </div>
         </div>
-
-        <div class="no-ads">
-            <h3>🚫 بدون أي إعلانات</h3>
-            <p>تطبيقنا نقي تماماً لكي تستمتع بتجربة قرانية هادئة ومريحة</p>
-        </div>
-    </section>
-
-    <!-- AI -->
-    <section class="section" id="ai">
-        <h2 class="section-title">صحبة AI</h2>
-        <p class="section-desc">أهم ميزة في التطبيق — مساعدك الذكي في الدين</p>
-        <div class="ai-box">
-            <span class="ai-badge"><i class="fas fa-star"></i> الميزة الأهم</span>
-            <h3>💬 صحبة AI</h3>
-            <p>
-                يمكنك السؤال عن <span class="highlight">أي شيء في الدين</span> وسوف يجيبك صحبة AI بإجابات دقيقة ومبنية على مصادر شرعية موثوقة.
-                سواء سألت عن أحكام، أو أحاديث، أو تفسير، أو أي شيء آخر — <strong>هو شريكك الدائم في دينك</strong>.
-            </p>
-            <div class="ai-tag">
-                <span class="live-dot"></span>
-                <span>🤖 ذكاء اصطناعي ديني</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- DOWNLOAD -->
-    <section class="download-section" id="download">
-        <h2>📲 حمّل التطبيق الآن</h2>
-        <p>صحبة — صاحبك في القرآن الكريم 💚</p>
-        <div class="btn-group">
-            <a href="https://www.mediafire.com/file/6tbdoi3oulj2k6e/sohba.quran-v1.2.apk/file" target="_blank" rel="noopener noreferrer" class="btn-download">
-                <i class="fas fa-download"></i> تحميل للأندرويد
-            </a>
-            <button class="btn-windows" onclick="showToast()">
-                <i class="fab fa-windows"></i> تحميل للويندوز
-            </button>
-            <a href="#support" onclick="openSupport(event)" class="btn-support">
-                <i class="fas fa-hands-helping"></i> ادعمنا
-            </a>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <p>© 2026 — تطبيق صحبة — جميع الحقوق محفوظة</p>
-        <p class="dev">المطور: عمر ابراهيم</p>
     </footer>
 
-    <!-- SUPPORT MODAL -->
-    <div class="modal-overlay" id="supportModal">
+    <div
+        class="support-modal"
+        id="supportModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="supportTitle"
+        hidden
+    >
         <div class="modal-box">
-            <button class="modal-close" onclick="closeSupport()">✕</button>
-            <div class="modal-icon">🤝</div>
-            <h2>ادعمنا</h2>
-            <p class="modal-text">
-                إذا أعجبك التطبيق ووجدت فيه فائدة، ساعدنا في نشره حتى يصل إلى المزيد من المسلمين
-            </p>
+            <button
+                class="modal-close"
+                id="supportClose"
+                type="button"
+                aria-label="إغلاق نافذة الدعم"
+            >
+                &times;
+            </button>
 
-            <div class="vodafone-box">
-                <p class="label">📱 فودافون كاش</p>
-                <div class="num">01010662715</div>
-                <p class="label2">رقم الدعم</p>
+            <div class="modal-icon" aria-hidden="true">
+                ✓
             </div>
 
-            <p class="thanks">جزاك الله خيراً 🤲</p>
-            <p class="thanks-sub">شكراً لاستجابتك</p>
+            <h2 id="supportTitle">
+                الدعم والمساهمة
+            </h2>
 
-            <div class="ps-box">
-                <span class="ps-icon">🎮</span>
-                <p>
-                    إذا أمكن، ساعدنا في نشر التطبيق على متجر Google Play حتى يصل لعدد أكبر من المستخدمين.
-                    أي دعم مادي أو معنوي يُسعدنا ويُزدهر العمل على إنشاء تطبيقات إسلامية مفيدة.
-                </p>
+            <p>
+                شكراً لك على دعمكم، جزاكم الله خيرا. مساهمتكم تساعدنا على
+                مواصلة تطوير تطبيق صحبة ونشره على متجر Google Play عند التوسع.
+            </p>
+
+            <div class="payment-box">
+                <span class="payment-label">
+                    رقم فودافون كاش
+                </span>
+
+                <strong
+                    class="payment-number"
+                    dir="ltr"
+                    lang="en"
+                >
+                    01010662715
+                </strong>
+
+                <button
+                    class="copy-button"
+                    id="copySupportButton"
+                    type="button"
+                >
+                    نسخ الرقم
+                </button>
+            </div>
+
+            <div class="support-message">
+                <strong>رسالة الدعم:</strong>
+                <br>
+               感谢 أو جزاكم الله خيرا على تعاونكم معنا. مساهمتكم تساعدنا
+                على نشر التطبيق إلى المتجر وإتاحة المزيد من المميزات للمستخدمين.
             </div>
         </div>
     </div>
 
-    <!-- TOAST -->
-    <div class="toast" id="toast">
-        <i class="fas fa-clock"></i>
-        سيتوفر قريباً إن شاء الله 🤲
-    </div>
-
-    <!-- SCROLL TOP -->
-    <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script>
-        function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('active');
-        }
+        (() => {
+            "use strict";
 
-        function openSupport(e) {
-            e.preventDefault();
-            document.getElementById('supportModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+            const supportModal = document.getElementById("supportModal");
+            const supportClose = document.getElementById("supportClose");
+            const copySupportButton = document.getElementById("copySupportButton");
+            const toast = document.getElementById("toast");
+            const supportNumber = "01010662715";
+            let toastTimer;
 
-        function closeSupport() {
-            document.getElementById('supportModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
+            const openSupport = () => {
+                supportModal.hidden = false;
+                document.body.classList.add("modal-open");
+                supportClose.focus();
+            };
 
-        document.getElementById('supportModal').addEventListener('click', function(e) {
-            if (e.target === this) closeSupport();
-        });
+            const closeSupport = () => {
+                supportModal.hidden = true;
+                document.body.classList.remove("modal-open");
+            };
 
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
+            document
+                .querySelectorAll("[data-open-support]")
+                .forEach((button) => {
+                    button.addEventListener("click", openSupport);
+                });
 
-        const scrollBtn = document.getElementById('scrollTopBtn');
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                scrollBtn.classList.add('visible');
-            } else {
-                scrollBtn.classList.remove('visible');
-            }
-        });
+            supportClose.addEventListener("click", closeSupport);
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeSupport();
-        });
+            supportModal.addEventListener("click", (event) => {
+                if (event.target === supportModal) {
+                    closeSupport();
+                }
+            });
 
-        document.addEventListener('touchend', function(e) {
-            if (e.touches.length > 1) e.preventDefault();
-        }, { passive: false });
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && !supportModal.hidden) {
+                    closeSupport();
+                }
+            });
+
+            const showToast = (message) => {
+                toast.textContent = message;
+                toast.classList.add("show");
+
+                window.clearTimeout(toastTimer);
+
+                toastTimer = window.setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 2600);
+            };
+
+            const copySupportNumber = async () => {
+                try {
+                    if (!navigator.clipboard) {
+                        throw new Error("Clipboard API unavailable");
+                    }
+
+                    await navigator.clipboard.writeText(supportNumber);
+                    showToast("تم نسخ رقم فودافون كاش");
+                    return;
+                } catch (error) {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = supportNumber;
+                    textArea.setAttribute("readonly", "");
+                    textArea.style.position = "fixed";
+                    textArea.style.opacity = "0";
+                    textArea.style.pointerEvents = "none";
+
+                    document.body.appendChild(textArea);
+                    textArea.select();
+
+                    const copied = document.execCommand("copy");
+                    textArea.remove();
+
+                    if (copied) {
+                        showToast("تم نسخ رقم فودافون كاش");
+                    } else {
+                        showToast(`رقم فودافون كاش: ${supportNumber}`);
+                    }
+                }
+            };
+
+            copySupportButton.addEventListener("click", copySupportNumber);
+
+            const windowsButton = document.getElementById("windowsButton");
+
+            windowsButton.addEventListener("click", () => {
+                window.alert(
+                    "سيتم توفير نسخة الويندوز قريباً إن شاء الله."
+                );
+            });
+
+            document.getElementById("currentYear").textContent =
+                new Date().getFullYear();
+
+            const chatForm = document.getElementById("chatForm");
+            const chatInput = document.getElementById("chatInput");
+            const chatMessages = document.getElementById("chatMessages");
+
+            const appendMessage = (text, type) => {
+                const message = document.createElement("div");
+                message.className = `message ${type}`;
+
+                const label = document.createElement("strong");
+                label.textContent = type === "user" ? "أنت" : "صحبة AI";
+
+                const content = document.createElement("span");
+                content.textContent = text;
+
+                message.appendChild(label);
+                message.appendChild(content);
+                chatMessages.appendChild(message);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
+
+            const normalizeText = (value) => {
+                return value
+                    .toLowerCase()
+                    .trim()
+                    .replace(/[\u064B-\u065F\u0670]/g, "")
+                    .replace(/أ/g, "ا")
+                    .replace(/إ/g, "ا")
+                    .replace(/آ/g, "ا")
+                    .replace(/ى/g, "ي")
+                    .replace(/\s+/g, " ");
+            };
+
+            const hasAny = (text, words) => {
+                return words.some((word) => text.includes(word));
+            };
+
+            const getBotReply = (question) => {
+                const normalized = normalizeText(question);
+
+                if (
+                    hasAny(normalized, [
+                        "تحميل",
+                        "اندوريد",
+                        "أندرويد",
+                        "android",
+                        "apk"
+                    ])
+                ) {
+                    return "يمكنك استخدام زر «تحديث أو تحميل للاندوريد» في أعلى الموقع. الرابط يحملك مباشرة إلى إصدار APK، خارج متجر Google Play.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "ويندوز",
+                        "كمبيوتر",
+                        "pc",
+                        "حاسوب"
+                    ])
+                ) {
+                    return "نسخة الويندوز ليست متوفرة حالياً، لكن سيتم إصدارها قريباً إن شاء الله.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "دعم",
+                        "تبرع",
+                        "فودافون",
+                        "مساهمة",
+                        "رقم"
+                    ])
+                ) {
+                    return "شكراً لدعمكم، جزاكم الله خيرا. رقم فودافون كاش للمساهمة هو 01010662715. مساهمتكم تساعدنا على نشر التطبيق على Google Play عند التوسع.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "إعلان",
+                        "اعلان",
+                        "بلا إعلانات",
+                        "بدون إعلانات"
+                    ])
+                ) {
+                    return "نعم، تطبيق صحبة مصمم ليكون بلا إعلانات، حتى تكون تجربة القرآن والصلاة والذكر أكثر هدوءاً.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "تفسير",
+                        "آية",
+                        "آيات",
+                        "سورة",
+                        "سور",
+                        "قرآن",
+                        "ترجمة"
+                    ])
+                ) {
+                    return "يمكنك فتح القرآن الكريم داخل تطبيق صحبة، اختيار السورة والآية، ثم الضغط على خيار التفسير لعرض المعنى والمعلومات المساعدة.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "مواقيت",
+                        "صلاة",
+                        "صلا",
+                        "فجر",
+                        "ظهر",
+                        "عصر",
+                        "مغرب",
+                        "عشاء",
+                        "وقت الصلاة"
+                    ])
+                ) {
+                    return "توفر صحبة مواقيت الصلاة حسب الموقع، مع عرض الصلاة الحالية والتالية والتنبيهات المناسبة. تأكد من السماح بإتاحة الموقع عند الحاجة.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "سبحة",
+                        "سبح",
+                        "تسبيح",
+                        "عدّاد",
+                        "عداد"
+                    ])
+                ) {
+                    return "افتح السبحة من الشاشة الرئيسية، اختر العدد المناسب، واضغط على زر الذكر. يمكنك إعادة العداد عند الانتهاء.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "قبلة",
+                        "اتجاه",
+                        "اتجاه الصلاة"
+                    ])
+                ) {
+                    return "افتح أداة القبلة في التطبيق، ثم اسمح بإتاحة الموقع والحساسات إذا طلب التطبيق ذلك. سيوضح المؤشر اتجاه القبلة.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "اذكار",
+                        "أذكار",
+                        "ذكر",
+                        "تسبيح",
+                        "تسبيحات"
+                    ])
+                ) {
+                    return "توجد داخل التطبيق أذكار الصباح والمساء وأذكار الصلاة، مع السبحة الرقمية والتذكير بالذكر في أوقات مناسبة.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "دعاء",
+                        "دعاءات",
+                        "أدعية"
+                    ])
+                ) {
+                    return "يمكنك فتح قسم الأدعية في التطبيق والبحث عن الدعاء المناسب، ثم قراءته وحفظه أو تشغيل التذكير حسب الإعدادات.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "سيرة",
+                        "نبوي",
+                        "رسول",
+                        "صحاب",
+                        "غزوة"
+                    ])
+                ) {
+                    return "افتح قسم السيرة النبوية لعرض المعلومات المبسطة عن سيرة النبي ﷺ والأحداث والشخصيات المرتبطة بها.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "أذان",
+                        "اذان",
+                        "تنبيه",
+                        "صوت"
+                    ])
+                ) {
+                    return "يمكنك تفعيل الأذان أو تنبيهات الصلاة من إعدادات التطبيق، ثم اختيار الصوت والإعدادات المناسبة لك.";
+                }
+
+                if (
+                    hasAny(normalized, [
+                        "مميزات",
+                        "ميزات",
+                        "فوائد",
+                        "ماذا يفعل"
+                    ])
+                ) {
+                    return "توفر صحبة مواقيت الصلاة، جميع سور القرآن الكريم، تفسير الآيات، محادثة صحبة AI، السبحة، القبلة، الأذكار، الأدعية، السيرة النبوية، والأذان، كلها بلا إعلانات.";
+                }
+
+                return "شكراً لسؤالك. هذه إجابة عامة وتثقيفية من تطبيق صحبة. للمسائل الفقهية أو الاستفتائات التفصيلية، يفضّل الرجوع إلى عالم مؤهل.";
+            };
+
+            const sendChat = () => {
+                const question = chatInput.value.trim();
+
+                if (!question) {
+                    chatInput.focus();
+                    return;
+                }
+
+                appendMessage(question, "user");
+                chatInput.value = "";
+
+                const reply = getBotReply(question);
+                appendMessage(reply, "bot");
+            };
+
+            chatForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+                sendChat();
+            });
+
+            document
+                .querySelectorAll(".question-chip")
+                .forEach((button) => {
+                    button.addEventListener("click", () => {
+                        chatInput.value = button.dataset.question;
+                        sendChat();
+                    });
+                });
+        })();
     </script>
 </body>
 </html>
